@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn More | Beezbizz</title>
+    <link rel="stylesheet" href="learn.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <section class="hero">
+        <h1> Discover Our Mission</h1>
+        <p>We build simple, powerful solutions to help entrepreneurs launch and scale their businesses with confidence.</p>
+        <button id="learnMoreBtn"> Explore Our Story</button>
+    </section>
+
+    <div id="contentSection" class="content hidden">
+        <div class="card-container">
+            <div class="card">
+                <h3> Our Vision</h3>
+                <p>To empower creators and entrepreneurs worldwide with accessible, powerful business tools and resources that level the playing field.</p>
+            </div>
+            <div class="card">
+                <h3> What We Do</h3>
+                <p>We deliver comprehensive business solutions including planning guides, marketing tools, financial management resources, and expert mentorship.</p>
+            </div>
+            <div class="card">
+                <h3> Core Values</h3>
+                <p>Simplicity, transparency, and user success guide every decision. We're committed to your growth, not just our metrics.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCROLL TO TOP BUTTON -->
+    <button class="scroll-to-top" id="scrollToTop" title="Go to top">↑</button>
+
+    <script>
+        // Toggle content visibility
+        document.getElementById('learnMoreBtn').addEventListener('click', function() {
+            const contentSection = document.getElementById('contentSection');
+            contentSection.classList.toggle('hidden');
+            
+            if (!contentSection.classList.contains('hidden')) {
+                // Scroll to content smoothly
+                setTimeout(() => {
+                    contentSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 100);
+            }
+        });
+
+        // Scroll to top functionality
+        const scrollToTopBtn = document.getElementById('scrollToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                scrollToTopBtn.classList.add('show');
+            } else {
+                scrollToTopBtn.classList.remove('show');
+            }
+        });
+
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Add hover effects to cards
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px)';
+            });
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+</body>
+</html>
+

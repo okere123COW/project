@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BEEZ BIZZ FOUNDATION | Services</title>
+  <link rel="stylesheet" href="services.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="services-hero">
+    <div class="container services-hero-content">
+      <div>
+        <p class="eyebrow">BEEZ BIZZ FOUNDATION</p>
+        <h1>Our Services</h1>
+        <p class="services-hero-copy">
+          We support business founders with planning, marketing, funding, and tools to grow faster. 
+          Explore our comprehensive suite of services designed to accelerate your success.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="home.html"> Go to Home</a>
+          <a class="btn btn-secondary" href="started.html"> Start Your Business</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="services-section">
+      <div class="container">
+        <div class="section-header">
+          <h2>Services designed for every entrepreneur</h2>
+          <p>Click any item to reveal how we make that step easier for your business.</p>
+        </div>
+
+        <ul class="services-grid">
+          <li class="service-card">
+            <button type="button" class="service-toggle" aria-expanded="false">
+               Business Planning & Strategy
+              <span class="toggle-icon">+</span>
+            </button>
+            <div class="service-detail">
+              <p>Get a simple, step-by-step plan that matches your industry, budget, and growth goals. Our experts will guide you through every stage.</p>
+            </div>
+          </li>
+
+          <li class="service-card">
+            <button type="button" class="service-toggle" aria-expanded="false">
+               Marketing & Branding
+              <span class="toggle-icon">+</span>
+            </button>
+            <div class="service-detail">
+              <p>Build a strong brand, create polished marketing assets, and attract customers with confidence. We provide templates and proven strategies.</p>
+            </div>
+          </li>
+
+          <li class="service-card">
+            <button type="button" class="service-toggle" aria-expanded="false">
+               Financial Management & Funding
+              <span class="toggle-icon">+</span>
+            </button>
+            <div class="service-detail">
+              <p>Track cash flow, set budgets, and connect with funding options that work for your business stage. Manage finances like a pro.</p>
+            </div>
+          </li>
+
+          <li class="service-card">
+            <button type="button" class="service-toggle" aria-expanded="false">
+               Networking & Mentorship
+              <span class="toggle-icon">+</span>
+            </button>
+            <div class="service-detail">
+              <p>Join workshops, mentorship sessions, and community events to grow your support network. Connect with fellow entrepreneurs and experts.</p>
+            </div>
+          </li>
+
+          <li class="service-card">
+            <button type="button" class="service-toggle" aria-expanded="false">
+              🛠️ Tools & Resources
+              <span class="toggle-icon">+</span>
+            </button>
+            <div class="service-detail">
+              <p>Use curated templates, guides, and tools so you can launch and scale without guesswork. Everything you need in one place.</p>
+            </div>
+          </li>
+        </ul>
+
+        <div class="service-footer">
+          <button id="contact-team" class="btn btn-primary"> Request a Custom Plan</button>
+          <p class="service-note">We’ll respond by email within one business day.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- SCROLL TO TOP BUTTON -->
+  <button class="scroll-to-top" id="scrollToTop" title="Go to top">↑</button>
+
+  <script>
+    // Service card toggle functionality
+    document.querySelectorAll('.service-toggle').forEach(toggle => {
+      toggle.addEventListener('click', function() {
+        const card = this.closest('.service-card');
+        const isOpen = card.classList.contains('is-open');
+        
+        // Close all other cards
+        document.querySelectorAll('.service-card.is-open').forEach(openCard => {
+          if (openCard !== card) {
+            openCard.classList.remove('is-open');
+            openCard.querySelector('.service-toggle').setAttribute('aria-expanded', 'false');
+          }
+        });
+        
+        // Toggle current card
+        card.classList.toggle('is-open');
+        this.setAttribute('aria-expanded', !isOpen);
+      });
+    });
+
+    // Scroll to top functionality
+    const scrollToTopBtn = document.getElementById('scrollToTop');
+    
+    window.addEventListener('scroll', () => {
+      if (window.pageYOffset > 300) {
+        scrollToTopBtn.classList.add('show');
+      } else {
+        scrollToTopBtn.classList.remove('show');
+      }
+    });
+
+    scrollToTopBtn.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+
+    // Contact button functionality
+    document.getElementById('contact-team').addEventListener('click', function() {
+      alert('Thank you for your interest! We will send you a custom plan via email shortly.');
+      this.textContent = '✓ Plan Request Sent!';
+      this.classList.add('button-sent');
+      setTimeout(() => {
+        this.textContent = ' Request a Custom Plan';
+        this.classList.remove('button-sent');
+      }, 3000);
+    });
+
+    // Add animation on scroll for service cards
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.animation = 'fadeInScale 0.6s ease forwards';
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.service-card').forEach(card => {
+      observer.observe(card);
+    });
+
+    // Add smooth hover effects to buttons
+    document.querySelectorAll('.btn').forEach(btn => {
+      btn.addEventListener('mouseenter', function() {
+        this.style.transform = 'translateY(-4px)';
+      });
+      btn.addEventListener('mouseleave', function() {
+        this.style.transform = 'translateY(0)';
+      });
+    });
+  </script>
+</body>
+</html>

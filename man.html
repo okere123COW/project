@@ -1,0 +1,272 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>beezbizz management</title>
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:Arial, sans-serif;
+    }
+
+    body{
+      display:flex;
+      background:#f4f7fb;
+      color:#333;
+    }
+
+    /* Sidebar */
+    .sidebar{
+      width:250px;
+      height:100vh;
+      background:gold;
+      color:white;
+      padding:20px;
+      position:fixed;
+    }
+
+    .sidebar h2{
+      margin-bottom:30px;
+      text-align:center;
+      color:BLACK;
+    }
+
+    .sidebar ul{
+      list-style:none;
+    }
+
+    .sidebar ul li{
+      padding:15px;
+      margin:10px 0;
+      border-radius:8px;
+      cursor:pointer;
+      transition:0.3s;
+    }
+
+    .sidebar ul li:hover{
+      background:black;
+    }
+
+    /* Main Content */
+    .main{
+      margin-left:250px;
+      padding:20px;
+      width:100%;
+    }
+
+    .header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:30px;
+    }
+
+    .header h1{
+      color:#f1f1f1f1;
+    }
+
+    .header button{
+      padding:10px 20px;
+      border:none;
+      background:black;
+      color:white;
+      border-radius:8px;
+      cursor:pointer;
+      font-size:16px;
+    }
+
+    .header button:hover{
+      background:black;
+    }
+
+    /* Cards */
+    .cards{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+      gap:20px;
+      margin-bottom:30px;
+    }
+
+    .card{
+      background:white;
+      padding:20px;
+      border-radius:12px;
+      box-shadow:0 4px 10px rgba(0,0,0,0.08);
+    }
+
+    .card h3{
+      margin-bottom:10px;
+      color:black;
+    }
+
+    .card p{
+      font-size:28px;
+      color:black;
+      font-weight:bold;
+    }
+
+    /* Table */
+    .table-section{
+      background:white;
+      padding:20px;
+      border-radius:12px;
+      box-shadow:0 4px 10px rgba(0,0,0,0.08);
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      margin-top:15px;
+    }
+
+    table th,
+    table td{
+      padding:15px;
+      text-align:left;
+      border-bottom:1px solid #ddd;
+    }
+
+    table th{
+      background:#e2e8f0;
+    }
+
+    .status{
+      padding:6px 12px;
+      border-radius:20px;
+      color:white;
+      font-size:14px;
+    }
+
+    .active{
+      background:#22c55e;
+    }
+
+    .pending{
+      background:#f59e0b;
+    }
+
+    .completed{
+      background:#3b855c;
+    }
+
+    /* Responsive */
+    @media(max-width:768px){
+      .sidebar{
+        width:200px;
+      }
+
+      .main{
+        margin-left:200px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h2>beezbizz</h2>
+
+    <ul>
+      <li>people behind</li>
+      <li>Projects</li>
+      <li>Investors</li>
+      <li>Mentorship</li>
+      <li>Tasks</li>
+      <li>Analytics</li>
+      <li>Settings</li>
+    </ul>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main">
+
+    <!-- Header -->
+    <div class="header">
+      <h1>beezbizz Management </h1>
+      <button>Create Project</button>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="cards">
+
+      <div class="card">
+        <h3>Total Projects</h3>
+        <p>0</p>
+      </div>
+
+      <div class="card">
+        <h3>Active Startups</h3>
+        <p>0</p>
+      </div>
+
+      <div class="card">
+        <h3>Investors Connected</h3>
+        <p>3</p>
+      </div>
+
+      <div class="card">
+        <h3>Mentors Available</h3>
+        <p>3</p>
+      </div>
+
+    </div>
+
+    <!-- Projects Table -->
+    <div class="table-section">
+      <h2>OUR BOARD</h2>
+
+      <table>
+        <thead>
+          <tr>
+            <th>board</th>
+            <th>name</th>
+            <th>period</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          <tr>
+            <td>founder</td>
+            <td>cephas okere</td>
+            <td>03-2026-</td>
+            <td><span class="status active">Active</span></td>
+          </tr>
+
+          <tr>
+            <td>co-founder</td>
+            <td>Austin Kiprono</td>
+            <td>03-2026</td>
+            <td><span class="status active">Active</span></td>
+          </tr>
+
+          <tr>
+            <td>secretary</td>
+            <td>Maxwell Gesanda</td>
+            <td>03-2026</td>
+            <td><span class="status pending">pending</span></td>
+          </tr>
+
+          <tr>
+            <td>marketing</td>
+            <td>Shanice Jeruto</td>
+            <td>03-2026</td>
+            <td><span class="status active">Active</span></td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register Your Business | Beezbizz</title>
+    <link rel="stylesheet" href="started.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="topbar">
+        <a class="brand" href="index.html">BEEZ BIZZ FOUNDATION</a>
+        <nav class="topnav">
+          <a href="home.html">Home</a>
+          <a href="services.html">Services</a>
+          <a href="learn.html">Learn</a>
+        </nav>
+      </header>
+
+      <main class="content-grid">
+        <section class="hero-panel">
+          <div class="hero-copy">
+            <p class="eyebrow">Start your business journey</p>
+            <h1>Register your business and create your idea</h1>
+            <p>
+              Share your business details, describe your product or service,
+              and launch your idea with confidence.
+            </p>
+            <div class="feature-list">
+              <div><strong>1.</strong> Register a business profile</div>
+              <div><strong>2.</strong> Write your idea</div>
+              <div><strong>3.</strong> Preview and submit</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="form-panel">
+          <div class="panel-card">
+            <h2>Register & launch</h2>
+            <p>
+              Fill out the form below to register your business and capture your
+              idea in one place.
+            </p>
+
+            <form id="business-form" novalidate>
+              <label for="business-name">Business name</label>
+              <input
+                id="business-name"
+                name="businessName"
+                type="text"
+                placeholder="Example: Sweet Hive Studio"
+                required
+              />
+
+              <label for="owner-name">Founder name</label>
+              <input
+                id="owner-name"
+                name="ownerName"
+                type="text"
+                placeholder="Your full name"
+                required
+              />
+
+              <label for="business-email">Email</label>
+              <input
+                id="business-email"
+                name="email"
+                type="email"
+                placeholder="you@example.com"
+                required
+              />
+
+              <label for="business-phone">Phone</label>
+              <input
+                id="business-phone"
+                name="phone"
+                type="tel"
+                placeholder="+1 555 0100"
+              />
+
+              <label for="business-password">Create password</label>
+              <div class="password-row">
+                <input
+                  id="business-password"
+                  name="password"
+                  type="password"
+                  placeholder="Choose a secure password"
+                  required
+                  minlength="8"
+                />
+                <button
+                  type="button"
+                  id="toggle-password"
+                  class="toggle-btn"
+                  aria-label="Show password"
+                >
+                  Show
+                </button>
+              </div>
+
+              <label for="business-category">Business category</label>
+              <select id="business-category" name="category" required>
+                <option value="">Select a category</option>
+                <option value="retail">Retail</option>
+                <option value="services">Services</option>
+                <option value="technology">Technology</option>
+                <option value="food">Food & Beverage</option>
+                <option value="creative">Creative</option>
+              </select>
+
+              <label for="idea-title">Idea title</label>
+              <input
+                id="idea-title"
+                name="ideaTitle"
+                type="text"
+                placeholder="Example: Local honey delivery"
+                required
+              />
+
+              <label for="idea-description">Describe your idea</label>
+              <textarea
+                id="idea-description"
+                name="ideaDescription"
+                rows="5"
+                placeholder="Write your business idea here..."
+                required
+                minlength="20"
+              ></textarea>
+
+              <label for="funding-goal">Funding goal</label>
+              <input
+                id="funding-goal"
+                name="fundingGoal"
+                type="text"
+                placeholder="$5,000"
+              />
+
+              <button type="submit" class="btn btn-primary">
+                ✅ Submit Registration
+              </button>
+
+              <div id="form-message" class="form-message" aria-live="polite"></div>
+            </form>
+
+            <div class="idea-preview-card">
+              <h3> Live Idea Preview</h3>
+              <p id="idea-preview">
+                Type your idea description to see a quick preview here.
+              </p>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <!-- SCROLL TO TOP BUTTON -->
+    <button class="scroll-to-top" id="scrollToTop" title="Go to top">↑</button>
+
+    <script>
+      // Scroll to top functionality
+      const scrollToTopBtn = document.getElementById('scrollToTop');
+      
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) {
+          scrollToTopBtn.classList.add('show');
+        } else {
+          scrollToTopBtn.classList.remove('show');
+        }
+      });
+
+      scrollToTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+
+      // Live preview functionality
+      const ideaDescriptionTextarea = document.getElementById('idea-description');
+      const ideaPreviewParagraph = document.getElementById('idea-preview');
+
+      ideaDescriptionTextarea.addEventListener('input', function() {
+        if (this.value.trim()) {
+          ideaPreviewParagraph.textContent = this.value;
+        } else {
+          ideaPreviewParagraph.textContent = 'Type your idea description to see a quick preview here.';
+        }
+      });
+
+      // Form validation and submission
+      const form = document.getElementById('business-form');
+      const formMessage = document.getElementById('form-message');
+
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const businessName = document.getElementById('business-name').value;
+        const email = document.getElementById('business-email').value;
+        const password = document.getElementById('business-password').value;
+
+        // Simple validation
+        if (!businessName || !email || !password) {
+          showMessage('Please fill in all required fields.', 'error');
+          return;
+        }
+
+        if (password.length < 8) {
+          showMessage('Password must be at least 8 characters long.', 'error');
+          return;
+        }
+
+        // Success message
+        showMessage(' Registration submitted successfully! Welcome to Beezbizz.', 'success');
+        form.reset();
+        ideaPreviewParagraph.textContent = 'Type your idea description to see a quick preview here.';
+        
+        setTimeout(() => {
+          formMessage.textContent = '';
+        }, 5000);
+      });
+
+      function showMessage(text, type) {
+        formMessage.textContent = text;
+        formMessage.className = `form-message ${type}`;
+      }
+
+      // Password visibility toggle
+      const togglePasswordBtn = document.getElementById('toggle-password');
+      const passwordInput = document.getElementById('business-password');
+
+      if (togglePasswordBtn && passwordInput) {
+        togglePasswordBtn.addEventListener('click', function() {
+          const isPassword = passwordInput.type === 'password';
+          passwordInput.type = isPassword ? 'text' : 'password';
+          this.textContent = isPassword ? 'Hide' : 'Show';
+        });
+      }
+
+      // Add smooth hover effects
+      document.querySelectorAll('.btn').forEach(btn => {
+        btn.addEventListener('mouseenter', function() {
+          this.style.transform = 'translateY(-4px)';
+        });
+        btn.addEventListener('mouseleave', function() {
+          this.style.transform = 'translateY(0)';
+        });
+      });
+
+      // Input field animation
+      document.querySelectorAll('input, textarea, select').forEach(input => {
+        input.addEventListener('focus', function() {
+          this.style.transform = 'scale(1.02)';
+        });
+        input.addEventListener('blur', function() {
+          this.style.transform = 'scale(1)';
+        });
+      });
+    </script>
+  </body>
+</html>

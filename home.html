@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>beezbizz - Start & Grow Your Business</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: linear-gradient(135deg, #f7f9fc 0%, #eef2f7 100%);
+      color: #222;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* SCROLL TO TOP BUTTON */
+    .scroll-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, #f4b400, #ff9800);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 20px;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 99;
+      box-shadow: 0 8px 25px rgba(244, 180, 0, 0.3);
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      animation: slideInUp 0.5s ease forwards;
+    }
+
+    .scroll-to-top:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 35px rgba(244, 180, 0, 0.4);
+    }
+
+    .scroll-to-top.show {
+      display: flex;
+      animation: slideInUp 0.5s ease forwards;
+    }
+
+    @keyframes slideInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInScale {
+      from {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-20px);
+      }
+    }
+
+    @keyframes glow {
+      0%, 100% {
+        box-shadow: 0 0 20px rgba(244, 180, 0, 0.3);
+      }
+      50% {
+        box-shadow: 0 0 30px rgba(244, 180, 0, 0.5);
+      }
+    }
+
+    header {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 15px 8%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      animation: slideInDown 0.6s ease;
+    }
+
+    .logo {
+      font-size: 14px;
+      font-weight: 800;
+      color: white;
+      padding: 12px 16px;
+      background: linear-gradient(135deg, #f4b400, #ff9800);
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .logo:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(244, 180, 0, 0.3);
+    }
+
+    .logo img {
+      height: 30px;
+      width: auto;
+    }
+
+    nav {
+      display: flex;
+      gap: 40px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #1c1c1c;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      position: relative;
+      font-size: 15px;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #f4b400, #ff9800);
+      transition: width 0.3s ease;
+      border-radius: 2px;
+    }
+
+    nav a:hover {
+      color: #f4b400;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    .hero {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 100px 8%;
+      min-height: 95vh;
+      gap: 50px;
+      flex-wrap: wrap;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(244, 180, 0, 0.1), transparent);
+      border-radius: 50%;
+      animation: float 6s ease-in-out infinite;
+      z-index: 0;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: -10%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(100, 200, 255, 0.08), transparent);
+      border-radius: 50%;
+      animation: float 8s ease-in-out infinite reverse;
+      z-index: 0;
+    }
+
+    .hero-text {
+      flex: 1;
+      min-width: 300px;
+      z-index: 1;
+      animation: slideInUp 0.8s ease 0.2s both;
+    }
+
+    .hero-text h1 {
+      font-size: 62px;
+      line-height: 1.15;
+      margin-bottom: 25px;
+      color: #111827;
+      font-weight: 800;
+      background: linear-gradient(135deg, #111827, #f4b400);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-text p {
+      font-size: 18px;
+      margin-bottom: 35px;
+      color: #555;
+      line-height: 1.8;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      animation: slideInUp 0.8s ease 0.4s both;
+    }
+
+    .btn {
+      padding: 16px 35px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 700;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: width 0.6s, height 0.6s;
+    }
+
+    .btn:hover::before {
+      width: 300px;
+      height: 300px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #f4b400, #ff9800);
+      color: white;
+      box-shadow: 0 10px 30px rgba(244, 180, 0, 0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 15px 40px rgba(244, 180, 0, 0.4);
+    }
+
+    .btn-secondary {
+      border: 2.5px solid #1c1c1c;
+      color: #1c1c1c;
+      background: white;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    .btn-secondary:hover {
+      background: #1c1c1c;
+      color: white;
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .hero-image {
+      flex: 1;
+      min-width: 300px;
+      z-index: 1;
+      animation: fadeInScale 0.8s ease 0.3s both;
+    }
+
+    .hero-image img {
+      width: 100%;
+      border-radius: 25px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+      transition: all 0.3s ease;
+      animation: glow 3s ease-in-out infinite;
+    }
+
+    .hero-image:hover img {
+      transform: scale(1.02);
+      box-shadow: 0 25px 70px rgba(244, 180, 0, 0.2);
+    }
+
+    .features {
+      padding: 120px 8%;
+      background: white;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .features::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(244, 180, 0, 0.08), transparent);
+      border-radius: 50%;
+    }
+
+    .section-title {
+      font-size: 48px;
+      margin-bottom: 15px;
+      color: #111827;
+      font-weight: 800;
+      animation: slideInUp 0.6s ease both;
+    }
+
+    .section-subtitle {
+      color: #666;
+      margin-bottom: 60px;
+      font-size: 18px;
+      animation: slideInUp 0.6s ease 0.1s both;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .feature-card {
+      background: linear-gradient(135deg, #f9fafb, #ffffff);
+      padding: 40px 35px;
+      border-radius: 20px;
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      border: 2px solid transparent;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      animation: fadeInScale 0.6s ease both;
+    }
+
+    .feature-card:nth-child(1) { animation-delay: 0.1s; }
+    .feature-card:nth-child(2) { animation-delay: 0.2s; }
+    .feature-card:nth-child(3) { animation-delay: 0.3s; }
+    .feature-card:nth-child(4) { animation-delay: 0.4s; }
+
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(244, 180, 0, 0.1), rgba(255, 152, 0, 0.05));
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-10px);
+      border-color: #f4b400;
+      box-shadow: 0 20px 50px rgba(244, 180, 0, 0.15);
+    }
+
+    .feature-card:hover::before {
+      transform: translateX(0);
+    }
+
+    .feature-card h3 {
+      margin: 20px 0 12px;
+      color: #111827;
+      font-weight: 700;
+      font-size: 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .feature-card p {
+      color: #666;
+      line-height: 1.8;
+      position: relative;
+      z-index: 1;
+    }
+
+    .feature-icon {
+      font-size: 50px;
+      position: relative;
+      z-index: 1;
+      transition: transform 0.3s ease;
+      display: inline-block;
+    }
+
+    .feature-card:hover .feature-icon {
+      transform: scale(1.2) rotate(10deg);
+    }
+
+    .cta {
+      padding: 100px 8%;
+      background: linear-gradient(135deg, #f4b400, #ff9800);
+      color: white;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      animation: slideInUp 0.8s ease both;
+    }
+
+    .cta::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -10%;
+      width: 400px;
+      height: 400px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .cta::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      right: -5%;
+      width: 300px;
+      height: 300px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 50%;
+      animation: float 8s ease-in-out infinite reverse;
+    }
+
+    .cta h2 {
+      font-size: 48px;
+      margin-bottom: 20px;
+      font-weight: 800;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta p {
+      max-width: 700px;
+      margin: auto;
+      margin-bottom: 40px;
+      font-size: 18px;
+      position: relative;
+      z-index: 1;
+      line-height: 1.8;
+    }
+
+    .cta .btn {
+      position: relative;
+      z-index: 1;
+    }
+
+    footer {
+      background: linear-gradient(135deg, #111827, #1a2332);
+      color: #ddd;
+      padding: 50px 8%;
+      text-align: center;
+      border-top: 1px solid rgba(244, 180, 0, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    footer p {
+      font-size: 15px;
+      line-height: 1.8;
+    }
+
+    @media (max-width: 768px) {
+      .hero-text h1 {
+        font-size: 40px;
+      }
+
+      nav {
+        display: none;
+      }
+
+      .hero {
+        padding: 60px 8%;
+        min-height: auto;
+      }
+
+      .section-title {
+        font-size: 36px;
+      }
+
+      .cta h2 {
+        font-size: 36px;
+      }
+
+      .btn {
+        padding: 14px 28px;
+        font-size: 15px;
+      }
+
+      .scroll-to-top {
+        bottom: 20px;
+        right: 20px;
+        width: 45px;
+        height: 45px;
+        font-size: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="logo"><img src="ae857a05f9c0443eabf3b40edbd841a7-free.png" alt="Beezbizz Logo">BEEZBIZZ</div>
+
+    <nav>
+      <a href="services.html">Services</a>
+      <a href="about.html">About</a>
+      <a href="marketing.html">Marketing</a>
+      <a href="learn.html">Learn</a>
+      <a href="started.html">Get Started</a>
+    </nav>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="hero-text">
+      <h1>Start, Manage & Grow Your Business With Confidence</h1>
+
+      <p>
+        Beezbizz helps entrepreneurs build successful businesses with tools,
+        guides, financial support, and expert resources — all in one platform.
+        Launch faster, scale smarter, succeed together.
+      </p>
+
+      <div class="hero-buttons">
+        <a href="started.html" class="btn btn-primary"> Get Started</a>
+        <a href="learn.html" class="btn btn-secondary"> Learn More</a>
+      </div>
+    </div>
+
+    <div class="hero-image">
+      <img src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?q=80&w=1200&auto=format&fit=crop"
+        alt="Business Team Collaboration">
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features">
+    <h2 class="section-title">Everything You Need To Run Your Business</h2>
+
+    <p class="section-subtitle">
+      Tools and services designed for startups, freelancers, and growing companies.
+    </p>
+
+    <div class="feature-grid">
+
+      <div class="feature-card">
+        <div class="feature-icon"></div>
+        <h3>Business Planning</h3>
+        <p>Create business plans, strategies, and goals for long-term success. Get step-by-step guidance tailored to your industry.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon"></div>
+        <h3>Finance Management</h3>
+        <p>Track expenses, profits, invoices, and manage your cash flow easily. Stay on top of your financials in real-time.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon"></div>
+        <h3>Marketing Tools</h3>
+        <p>Promote your business using social media, email campaigns, and SEO tools. Reach your audience where they are.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon"></div>
+        <h3>Expert Support</h3>
+        <p>Connect with mentors, consultants, and legal experts whenever needed. Get expert advice at every step.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA SECTION -->
+  <section class="cta">
+    <h2>Ready To Build Your Dream Business?</h2>
+
+    <p>
+      Join thousands of entrepreneurs already using Beezbizz to turn their ideas into profitable businesses.
+      Start your journey today and get access to all our premium tools and resources.
+    </p>
+
+    <a href="started.html" class="btn btn-primary"> Generate Plan Now</a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 Beezbizz. All rights reserved.</p>
+    <p style="margin-top: 10px; font-size: 13px; opacity: 0.8;">Building the future, one business at a time</p>
+  </footer>
+
+  <!-- SCROLL TO TOP BUTTON -->
+  <button class="scroll-to-top" id="scrollToTop" title="Go to top">↑</button>
+
+  <script>
+    // Smooth scroll to top functionality
+    const scrollToTopBtn = document.getElementById('scrollToTop');
+    
+    window.addEventListener('scroll', () => {
+      if (window.pageYOffset > 300) {
+        scrollToTopBtn.classList.add('show');
+      } else {
+        scrollToTopBtn.classList.remove('show');
+      }
+    });
+
+    scrollToTopBtn.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+
+    // Add animation on scroll
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.animation = 'slideInUp 0.6s ease forwards';
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    // Observe feature cards for animation
+    document.querySelectorAll('.feature-card').forEach(card => {
+      observer.observe(card);
+    });
+
+    // Add hover effect to buttons
+    document.querySelectorAll('.btn').forEach(btn => {
+      btn.addEventListener('mouseenter', function() {
+        this.style.transform = 'translateY(-4px)';
+      });
+      btn.addEventListener('mouseleave', function() {
+        this.style.transform = 'translateY(0)';
+      });
+    });
+
+    // Add interactive cursor effect
+    document.addEventListener('mousemove', (e) => {
+      const cards = document.querySelectorAll('.feature-card');
+      cards.forEach(card => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        
+        card.style.setProperty('--mouse-x', x + 'px');
+        card.style.setProperty('--mouse-y', y + 'px');
+      });
+    });
+
+    // Parallax effect on hero image
+    window.addEventListener('scroll', () => {
+      const heroImage = document.querySelector('.hero-image img');
+      if (heroImage && window.innerWidth > 768) {
+        const scrolled = window.pageYOffset;
+        heroImage.style.transform = `translateY(${scrolled * 0.3}px)`;
+      }
+    });
+  </script>
+
+</body>
+</html>
