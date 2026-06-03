@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Business Updates Hub</title>
+  <link rel="stylesheet" href="updates.css" />
+</head>
+<body>
+  <div class="page-shell">
+    <header class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Announce Your Business</p>
+        <h1>Share updates, events, launches, and offers with your community.</h1>
+        <p class="hero-text">
+          Build excitement with interactive announcements, tags, and previews. Your latest news lives here — easy to post and easy to share.
+        </p>
+      </div>
+      <div class="hero-panel">
+        <div class="panel-header">
+          <h2>Live Announcement Preview</h2>
+          <span class="badge">Interactive</span>
+        </div>
+        <article class="preview-card" id="livePreview">
+          <div class="topline">
+            <span class="preview-badge" id="previewCategory">Update</span>
+            <span id="previewDate">Today</span>
+          </div>
+          <h3 id="previewTitle">Your announcement title appears here</h3>
+          <p id="previewCopy">Type the update details and watch it refresh instantly.</p>
+          <div class="meta-row">
+            <span id="previewBusiness">Business Name</span>
+            <span class="pill" id="previewTag">Featured</span>
+          </div>
+        </article>
+      </div>
+    </header>
+
+    <main class="main-grid">
+      <section class="form-panel">
+        <div class="section-header">
+          <h2>Post a new announcement</h2>
+          <p>Fill in the details and publish your update instantly.</p>
+        </div>
+
+        <form id="announcementForm">
+          <div class="field-group">
+            <label for="businessName">Business name</label>
+            <input type="text" id="businessName" placeholder="e.g. Bright Cafe" required />
+          </div>
+
+          <div class="field-group">
+            <label for="announcementTitle">Announcement title</label>
+            <input type="text" id="announcementTitle" placeholder="e.g. New brunch menu launch" required />
+          </div>
+
+          <div class="field-row">
+            <div class="field-group">
+              <label for="announcementCategory">Category</label>
+              <select id="announcementCategory">
+                <option value="Update">Update</option>
+                <option value="Launch">Launch</option>
+                <option value="Offer">Offer</option>
+                <option value="Event">Event</option>
+              </select>
+            </div>
+
+            <div class="field-group">
+              <label for="announcementDate">Date</label>
+              <input type="date" id="announcementDate" />
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label for="announcementCopy">Details</label>
+            <textarea id="announcementCopy" rows="5" placeholder="Share the news, offer details, or event highlights..." required></textarea>
+          </div>
+
+          <div class="field-row">
+            <div class="field-group">
+              <label for="announcementLink">Link (optional)</label>
+              <input type="url" id="announcementLink" placeholder="https://yourbusiness.example" />
+            </div>
+
+            <div class="field-group toggle-group">
+              <label for="isFeatured">Feature this update</label>
+              <input type="checkbox" id="isFeatured" />
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Publish announcement</button>
+            <button type="button" id="clearAllBtn" class="btn btn-secondary">Clear all</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="feed-panel">
+        <div class="feed-header">
+          <div>
+            <h2>Announcements feed</h2>
+            <p>Review and filter every published update.</p>
+          </div>
+
+          <div class="filter-row">
+            <input type="search" id="searchInput" placeholder="Search announcements..." />
+            <select id="sortSelect">
+              <option value="newest">Newest first</option>
+              <option value="oldest">Oldest first</option>
+              <option value="featured">Featured first</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="chips" id="categoryFilters">
+          <button class="chip active" data-category="All">All</button>
+          <button class="chip" data-category="Update">Update</button>
+          <button class="chip" data-category="Launch">Launch</button>
+          <button class="chip" data-category="Offer">Offer</button>
+          <button class="chip" data-category="Event">Event</button>
+        </div>
+
+        <div id="announcementList" class="announcement-list">
+          <p class="empty-state">No announcements yet — create one to see it here.</p>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="updates.js"></script>
+</body>
+</html>
