@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adverts & Updates - Beez Bizz</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="advertise.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="navbar-container">
+      <div class="navbar-brand">
+        <a href="index.html"><i class="fas fa-briefcase"></i> Beez Bizz</a>
+      </div>
+      <ul class="nav-links">
+        <li><a href="home.html">Home</a></li>
+        <li><a href="advertise.html" class="active">Adverts</a></li>
+        <li><a href="updates.html">Updates</a></li>
+        <li><a href="account.html">Account</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Main Container -->
+  <div class="container">
+    <!-- Header Section -->
+    <header class="page-header">
+      <h1>Marketplace Adverts & Updates</h1>
+      <p>Browse products and services from verified sellers</p>
+    </header>
+
+    <div class="main-content">
+      <!-- Sidebar - Filters -->
+      <aside class="sidebar">
+        <div class="filter-section">
+          <h3>Filter Adverts</h3>
+          
+          <!-- Search -->
+          <div class="filter-group">
+            <label for="search">Search</label>
+            <input type="text" id="search" placeholder="Search adverts...">
+          </div>
+
+          <!-- Category Filter -->
+          <div class="filter-group">
+            <label for="category">Category</label>
+            <select id="category">
+              <option value="">All Categories</option>
+              <option value="services">Services</option>
+              <option value="products">Products</option>
+              <option value="digital">Digital</option>
+              <option value="consulting">Consulting</option>
+              <option value="training">Training</option>
+            </select>
+          </div>
+
+          <!-- Price Range Filter -->
+          <div class="filter-group">
+            <label for="priceRange">Max Price: $<span id="priceValue">5000</span></label>
+            <input type="range" id="priceRange" min="0" max="5000" value="5000" step="100">
+            <div class="price-range-labels">
+              <span>$0</span>
+              <span>$5000+</span>
+            </div>
+          </div>
+
+          <!-- Rating Filter -->
+          <div class="filter-group">
+            <label>
+              <input type="checkbox" id="ratingFilter" value="4">
+              <span>4+ Stars Only</span>
+            </label>
+          </div>
+
+          <!-- Buttons -->
+          <div class="filter-buttons">
+            <button class="btn btn-primary" id="applyFilters">Apply Filters</button>
+            <button class="btn btn-secondary" id="clearFilters">Clear All</button>
+          </div>
+        </div>
+
+        <!-- Trending Section -->
+        <div class="trending-section">
+          <h3><i class="fas fa-fire"></i> Trending</h3>
+          <ul class="trending-list" id="trendingList">
+            <li><a href="#">Digital Marketing</a></li>
+            <li><a href="#">Web Development</a></li>
+            <li><a href="#">Consulting</a></li>
+          </ul>
+        </div>
+      </aside>
+
+      <!-- Main Content Area -->
+      <main class="content-area">
+        <!-- Tabs -->
+        <div class="tabs">
+          <button class="tab-btn active" data-tab="adverts">
+            <i class="fas fa-tag"></i> All Adverts
+          </button>
+          <button class="tab-btn" data-tab="recent">
+            <i class="fas fa-clock"></i> Recent Updates
+          </button>
+          <button class="tab-btn" data-tab="featured">
+            <i class="fas fa-star"></i> Featured
+          </button>
+        </div>
+
+        <!-- Adverts Grid -->
+        <div class="tab-content active" id="adverts-tab">
+          <div class="view-toggle">
+            <button class="view-btn active" id="gridView" title="Grid View">
+              <i class="fas fa-th"></i>
+            </button>
+            <button class="view-btn" id="listView" title="List View">
+              <i class="fas fa-list"></i>
+            </button>
+            <div class="sort-dropdown">
+              <select id="sortBy">
+                <option value="newest">Newest First</option>
+                <option value="oldest">Oldest First</option>
+                <option value="pricelow">Price: Low to High</option>
+                <option value="pricehigh">Price: High to Low</option>
+                <option value="rating">Top Rated</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="adverts-grid" id="advertsContainer">
+            <!-- Adverts will be loaded here by JavaScript -->
+          </div>
+        </div>
+
+        <!-- Recent Updates Tab -->
+        <div class="tab-content" id="recent-tab">
+          <div class="updates-container" id="updatesContainer">
+            <!-- Updates will be loaded here by JavaScript -->
+          </div>
+        </div>
+
+        <!-- Featured Tab -->
+        <div class="tab-content" id="featured-tab">
+          <div class="adverts-grid featured-grid" id="featuredContainer">
+            <!-- Featured adverts will be loaded here -->
+          </div>
+        </div>
+
+        <!-- Load More Button -->
+        <div class="load-more-container">
+          <button class="btn btn-outline" id="loadMore">Load More Adverts</button>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Advert Detail Modal -->
+  <div class="modal" id="advertModal">
+    <div class="modal-content">
+      <button class="close-btn">&times;</button>
+      <div class="modal-body" id="modalBody">
+        <!-- Advert details will be loaded here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2026 Beez Bizz Marketplace. All rights reserved.</p>
+  </footer>
+
+  <script src="advertise.js"></script>
+</body>
+</html>
