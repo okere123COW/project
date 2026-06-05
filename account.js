@@ -17,6 +17,94 @@ const businessData = {
   },
 };
 
+// Toast Notification System
+const notificationContainer = document.createElement("div");
+notificationContainer.id = "notification-container";
+notificationContainer.style.cssText = `
+  position: fixed;
+  top: 80px;
+  right: 20px;
+  z-index: 3000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;
+document.body.appendChild(notificationContainer);
+
+// Add animation styles
+const notificationStyle = document.createElement("style");
+notificationStyle.textContent = `
+  @keyframes slideInRight {
+    from { opacity: 0; transform: translateX(400px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes slideOutRight {
+    from { opacity: 1; transform: translateX(0); }
+    to { opacity: 0; transform: translateX(400px); }
+  }
+  @keyframes slideInLeft {
+    from { opacity: 0; transform: translateX(-20px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes fillWidth {
+    from { width: 0%; }
+    to { width: var(--width, 0%); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .quantity-badge {
+    background: rgba(244, 180, 0, 0.2);
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-weight: 600;
+    color: #f4b400;
+  }
+  .badge-quantity {
+    background: rgba(76, 175, 80, 0.1);
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-weight: 600;
+    color: #4caf50;
+  }
+  .meta-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .advert-status-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+  .advert-status-badge.active {
+    background: rgba(76, 175, 80, 0.1);
+    color: #4caf50;
+  }
+  .advert-status-badge.paused {
+    background: rgba(255, 152, 0, 0.1);
+    color: #ff9800;
+  }
+  .branch-status-badge {
+    display: inline-block;
+    background: rgba(76, 175, 80, 0.1);
+    color: #4caf50;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+`;
+document.head.appendChild(notificationStyle);
+
 // Sample Inventory Data
 const inventoryData = [
   {
