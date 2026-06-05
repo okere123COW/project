@@ -16,7 +16,13 @@
         <nav class="topnav">
           <a href="home.html">Home</a>
           <a href="services.html">Services</a>
-            <a href="advertise.html">Advertise</a>
+          <a href="advertise.html">Advertise</a>
+          <a href="learn.html">Learn</a>
+          <a href="account.html">Account</a>
+        </nav>
+      </header>
+
+      <main class="content-grid">
         <section class="hero-panel">
           <div class="hero-copy">
             <p class="eyebrow">Start your business journey</p>
@@ -35,6 +41,12 @@
 
         <section class="form-panel">
           <div class="panel-card">
+            <div class="progress-tracker" aria-label="Registration progress">
+              <div class="progress-step active">1. Business</div>
+              <div class="progress-step">2. Idea</div>
+              <div class="progress-step">3. Preview</div>
+            </div>
+
             <h2>Register & launch</h2>
             <p>
               Fill out the form below to register your business and capture your
@@ -42,109 +54,137 @@
             </p>
 
             <form id="business-form" novalidate>
-              <label for="business-name">Business name</label>
-              <input
-                id="business-name"
-                name="businessName"
-                type="text"
-                placeholder="Example: Sweet Hive Studio"
-                required
-              />
-
-              <label for="owner-name">Founder name</label>
-              <input
-                id="owner-name"
-                name="ownerName"
-                type="text"
-                placeholder="Your full name"
-                required
-              />
-
-              <label for="business-email">Email</label>
-              <input
-                id="business-email"
-                name="email"
-                type="email"
-                placeholder="you@example.com"
-                required
-              />
-
-              <label for="business-phone">Phone</label>
-              <input
-                id="business-phone"
-                name="phone"
-                type="tel"
-                placeholder="+1 555 0100"
-              />
-
-              <label for="business-password">Create password</label>
-              <div class="password-row">
+              <div class="form-group">
+                <label for="business-name">Business name</label>
                 <input
-                  id="business-password"
-                  name="password"
-                  type="password"
-                  placeholder="Choose a secure password"
+                  id="business-name"
+                  name="businessName"
+                  type="text"
+                  placeholder="Example: Sweet Hive Studio"
                   required
-                  minlength="8"
                 />
-                <button
-                  type="button"
-                  id="toggle-password"
-                  class="toggle-btn"
-                  aria-label="Show password"
-                >
-                  Show
-                </button>
               </div>
 
-              <label for="business-category">Business category</label>
-              <select id="business-category" name="category" required>
-                <option value="">Select a category</option>
-                <option value="retail">Retail</option>
-                <option value="services">Services</option>
-                <option value="technology">Technology</option>
-                <option value="food">Food & Beverage</option>
-                <option value="creative">Creative</option>
-              </select>
+              <div class="form-group">
+                <label for="owner-name">Founder name</label>
+                <input
+                  id="owner-name"
+                  name="ownerName"
+                  type="text"
+                  placeholder="Your full name"
+                  required
+                />
+              </div>
 
-              <label for="idea-title">Idea title</label>
-              <input
-                id="idea-title"
-                name="ideaTitle"
-                type="text"
-                placeholder="Example: Local honey delivery"
-                required
-              />
+              <div class="form-group">
+                <label for="business-email">Email</label>
+                <input
+                  id="business-email"
+                  name="email"
+                  type="email"
+                  placeholder="you@example.com"
+                  required
+                />
+              </div>
 
-              <label for="idea-description">Describe your idea</label>
-              <textarea
-                id="idea-description"
-                name="ideaDescription"
-                rows="5"
-                placeholder="Write your business idea here..."
-                required
-                minlength="20"
-              ></textarea>
+              <div class="form-group">
+                <label for="business-phone">Phone</label>
+                <input
+                  id="business-phone"
+                  name="phone"
+                  type="tel"
+                  placeholder="+1 555 0100"
+                />
+              </div>
 
-              <label for="funding-goal">Funding goal</label>
-              <input
-                id="funding-goal"
-                name="fundingGoal"
-                type="text"
-                placeholder="$5,000"
-              />
+              <div class="form-group">
+                <label for="business-password">Create password</label>
+                <div class="password-row">
+                  <input
+                    id="business-password"
+                    name="password"
+                    type="password"
+                    placeholder="Choose a secure password"
+                    required
+                    minlength="8"
+                  />
+                  <button
+                    type="button"
+                    id="toggle-password"
+                    class="toggle-btn"
+                    aria-label="Show password"
+                  >
+                    Show
+                  </button>
+                </div>
+              </div>
 
-              <a href="account.html" class="btn btn-primary">✅ Submit Registration</a>
-              </button>
+              <div class="form-group">
+                <label for="business-category">Business category</label>
+                <select id="business-category" name="category" required>
+                  <option value="">Select a category</option>
+                  <option value="retail">Retail</option>
+                  <option value="services">Services</option>
+                  <option value="technology">Technology</option>
+                  <option value="food">Food & Beverage</option>
+                  <option value="creative">Creative</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="idea-title">Idea title</label>
+                <input
+                  id="idea-title"
+                  name="ideaTitle"
+                  type="text"
+                  placeholder="Example: Local honey delivery"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="idea-description">Describe your idea</label>
+                <textarea
+                  id="idea-description"
+                  name="ideaDescription"
+                  rows="5"
+                  placeholder="Write your business idea here..."
+                  required
+                  minlength="20"
+                ></textarea>
+              </div>
+
+              <div class="form-group">
+                <label for="funding-goal">Funding goal</label>
+                <input
+                  id="funding-goal"
+                  name="fundingGoal"
+                  type="text"
+                  placeholder="$5,000"
+                />
+              </div>
+
+              <div class="form-actions">
+                <button type="submit" class="btn btn-primary">✅ Submit Registration</button>
+                <button type="button" class="btn btn-secondary" id="copy-summary">Copy Summary</button>
+              </div>
 
               <div id="form-message" class="form-message" aria-live="polite"></div>
+              <div id="success-actions" class="success-actions hidden"></div>
             </form>
 
             <div class="idea-preview-card">
-              <h3> Live Idea Preview</h3>
+              <h3>Live Idea Preview</h3>
               <p id="idea-preview">
                 Type your idea description to see a quick preview here.
               </p>
+              <div class="preview-details">
+                <p><strong>Business:</strong> <span id="preview-name">Sweet Hive Studio</span></p>
+                <p><strong>Founder:</strong> <span id="preview-owner">Your name</span></p>
+                <p><strong>Category:</strong> <span id="preview-category">Not selected</span></p>
+                <p><strong>Goal:</strong> <span id="preview-goal">$0</span></p>
+                <p class="preview-suggestion" id="funding-suggestion">Enter a funding goal to receive a launch estimate.</p>
+              </div>
             </div>
           </div>
         </section>
@@ -154,105 +194,6 @@
     <!-- SCROLL TO TOP BUTTON -->
     <button class="scroll-to-top" id="scrollToTop" title="Go to top">↑</button>
 
-    <script>
-      // Scroll to top functionality
-      const scrollToTopBtn = document.getElementById('scrollToTop');
-      
-      window.addEventListener('scroll', () => {
-        if (window.pageYOffset > 300) {
-          scrollToTopBtn.classList.add('show');
-        } else {
-          scrollToTopBtn.classList.remove('show');
-        }
-      });
-
-      scrollToTopBtn.addEventListener('click', () => {
-        window.scrollTo({
-          top: 0,
-          behavior: 'smooth'
-        });
-      });
-
-      // Live preview functionality
-      const ideaDescriptionTextarea = document.getElementById('idea-description');
-      const ideaPreviewParagraph = document.getElementById('idea-preview');
-
-      ideaDescriptionTextarea.addEventListener('input', function() {
-        if (this.value.trim()) {
-          ideaPreviewParagraph.textContent = this.value;
-        } else {
-          ideaPreviewParagraph.textContent = 'Type your idea description to see a quick preview here.';
-        }
-      });
-
-      // Form validation and submission
-      const form = document.getElementById('business-form');
-      const formMessage = document.getElementById('form-message');
-
-      form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const businessName = document.getElementById('business-name').value;
-        const email = document.getElementById('business-email').value;
-        const password = document.getElementById('business-password').value;
-
-        // Simple validation
-        if (!businessName || !email || !password) {
-          showMessage('Please fill in all required fields.', 'error');
-          return;
-        }
-
-        if (password.length < 8) {
-          showMessage('Password must be at least 8 characters long.', 'error');
-          return;
-        }
-
-        // Success message
-        showMessage(' Registration submitted successfully! Welcome to Beezbizz.', 'success');
-        form.reset();
-        ideaPreviewParagraph.textContent = 'Type your idea description to see a quick preview here.';
-        
-        setTimeout(() => {
-          formMessage.textContent = '';
-        }, 5000);
-      });
-
-      function showMessage(text, type) {
-        formMessage.textContent = text;
-        formMessage.className = `form-message ${type}`;
-      }
-
-      // Password visibility toggle
-      const togglePasswordBtn = document.getElementById('toggle-password');
-      const passwordInput = document.getElementById('business-password');
-
-      if (togglePasswordBtn && passwordInput) {
-        togglePasswordBtn.addEventListener('click', function() {
-          const isPassword = passwordInput.type === 'password';
-          passwordInput.type = isPassword ? 'text' : 'password';
-          this.textContent = isPassword ? 'Hide' : 'Show';
-        });
-      }
-
-      // Add smooth hover effects
-      document.querySelectorAll('.btn').forEach(btn => {
-        btn.addEventListener('mouseenter', function() {
-          this.style.transform = 'translateY(-4px)';
-        });
-        btn.addEventListener('mouseleave', function() {
-          this.style.transform = 'translateY(0)';
-        });
-      });
-
-      // Input field animation
-      document.querySelectorAll('input, textarea, select').forEach(input => {
-        input.addEventListener('focus', function() {
-          this.style.transform = 'scale(1.02)';
-        });
-        input.addEventListener('blur', function() {
-          this.style.transform = 'scale(1)';
-        });
-      });
-    </script>
+    <script src="started.js" defer></script>
   </body>
 </html>

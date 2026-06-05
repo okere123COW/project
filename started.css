@@ -251,6 +251,31 @@ body {
   box-shadow: 0 12px 30px rgba(244, 180, 0, 0.1);
 }
 
+.progress-tracker {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.progress-step {
+  padding: 0.95rem 1rem;
+  border-radius: 18px;
+  background: #f8fafc;
+  color: #64748b;
+  font-weight: 700;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.progress-step.active {
+  background: linear-gradient(135deg, #f4b400, #ff9800);
+  color: white;
+  border-color: #f4b400;
+  box-shadow: 0 16px 30px rgba(244, 180, 0, 0.18);
+}
+
 .panel-card {
   background: white;
   border-radius: 32px;
@@ -440,6 +465,48 @@ textarea {
   margin: 0;
   color: #666;
   line-height: 1.75;
+}
+
+.preview-details {
+  margin-top: 1.25rem;
+  border-top: 1px solid #e2e8f0;
+  padding-top: 1rem;
+  display: grid;
+  gap: 0.8rem;
+}
+
+.preview-details p {
+  margin: 0;
+  color: #334155;
+  font-size: 0.95rem;
+}
+
+.preview-details strong {
+  color: #0f172a;
+}
+
+.preview-suggestion {
+  margin-top: 0.8rem;
+  padding: 1rem;
+  border-radius: 18px;
+  background: #fffbeb;
+  color: #92400e;
+  border: 1px solid #fcd34d;
+}
+
+.form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.success-actions {
+  margin-top: 1rem;
+}
+
+.hidden {
+  display: none !important;
 }
 
 .card {
