@@ -392,31 +392,77 @@ function renderInventoryTable() {
 
   inventoryBody.innerHTML = inventoryData
     .map((item) => {
-      const totalValue = item.quantity * item.unitPrice;
-      let status = "Good";
-      let statusClass = "good";
-
-      if (item.quantity <= item.lowStockLevel) {
-        status = "Critical";
-        statusClass = "critical";
-      } else if (item.quantity <= item.lowStockLevel * 2) {
-        status = "Low";
-        statusClass = "low";
-      }
-
-      return `
-    <tr>
-      <td><strong>${item.name}</strong></td>
-      <td>${item.category}</td>
-      <td>${item.quantity}</td>
-      <td>$${item.unitPrice}</td>
-      <td>$${totalValue.toLocaleString()}</td>
-      <td><span class="stock-status ${statusClass}">${status}</span></td>
-      <td>
-        <div class="action-buttons">
+      (advert) => `
+    <div class="advert-card" data-id="${advert.id}">
+      <div class="advert-card-image">${advert.icon}</div>
+      <div class="advert-card-body">
+        <div class="advert-card-title">${advert.title}</div>
+        <div class="advert-card-desc">${advert.description}</div>
+        <div class="advert-card-meta">
+          <span class="meta-item">${advert.views} views</span>
+          <span class="meta-item">${advert.clicks} clicks</span>
+        </div>
+        <div class="advert-card-price">$${advert.price}</div>
+        <div class="advert-card-actions">
+          <button class="btn-small" onclick="showAdvert(${advert.id})" title="View">
+            <i class="fas fa-eye"></i> View
+          </button>
+          <button onclick="editAdvert(${advert.id})" title="Edit">
+            <i class="fas fa-edit"></i>
+          </button>
+          <button class="delete-btn" onclick="deleteAdvert(${advert.id})" title="Delete">
+            <i class="fas fa-trash"></i> Delete
+          </button>
+          <button class="btn-small" onclick="toggleAdvertStatus(${advert.id})" title="Toggle status">
+            ${advert.status === 'active' ? 'Pause' : 'Resume'}
+          </button>
+        </div>
+      </div>
+    </div>
+  `
           <button class="action-btn edit" title="Edit" onclick="editInventory(${item.id})">
             <i class="fas fa-edit"></i>
           </button>
+
+// Show advert details in modal and increment views
+function showAdvert(id) {
+  const advert = advertsData.find((a) => a.id === id);
+  if (!advert) return;
+
+  // increment views
+  advert.views = (advert.views || 0) + 1;
+  renderAdvertsCards();
+  loadAdverts();
+
+  const modal = document.getElementById('advertModal');
+  const modalBody = document.getElementById('modalBody');
+  modalBody.innerHTML = `
+    <div class="modal-image">${advert.icon}</div>
+    <h2 class="modal-title">${advert.title}</h2>
+    <div class="modal-price">$${advert.price}</div>
+    <p class="modal-description">${advert.description}</p>
+    <div class="modal-meta">
+      <div>Category: ${advert.category}</div>
+      <div>Status: <strong>${advert.status}</strong></div>
+      <div>${advert.views} views • ${advert.clicks} clicks</div>
+    </div>
+    <div class="modal-buttons">
+      <button class="btn btn-primary" onclick="handleContactSeller(${advert.id})"><i class="fas fa-envelope"></i> Contact Seller</button>
+      <button class="btn btn-secondary" onclick="handleAddCart(${advert.id})"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+    </div>
+  `;
+
+  openModal(modal);
+}
+
+// Toggle advert status active <-> paused
+function toggleAdvertStatus(id) {
+  const advert = advertsData.find((a) => a.id === id);
+  if (!advert) return;
+  advert.status = advert.status === 'active' ? 'paused' : 'active';
+  renderAdvertsCards();
+  showNotification(`Advert "${advert.title}" is now ${advert.status}.`);
+}
           <button class="action-btn delete" title="Delete" onclick="deleteInventory(${item.id})">
             <i class="fas fa-trash"></i>
           </button>
@@ -566,40 +612,40 @@ function loadTopProducts() {
 
 function loadSalesTable() {
   const salesTableBody = document.getElementById("salesTableBody");
+  inventoryBody.innerHTML = inventoryData
+    .map((item) => {
+      const totalValue = item.quantity * item.unitPrice;
+      let status = "Good";
+      let statusClass = "good";
 
-  salesTableBody.innerHTML = salesData
-    .map(
-      (sale) => `
+      if (item.quantity <= item.lowStockLevel) {
+        status = "Critical";
+        statusClass = "critical";
+      } else if (item.quantity <= item.lowStockLevel * 2) {
+        status = "Low";
+        statusClass = "low";
+      }
+
+      return `
     <tr>
-      <td>${sale.date}</td>
-      <td>${sale.product}</td>
-      <td>${sale.quantity}</td>
-      <td>$${sale.amount}</td>
-      <td>${sale.customer}</td>
+      <td><strong>${item.name}</strong></td>
+      <td>${item.category}</td>
+      <td>${item.quantity}</td>
+      <td>$${item.unitPrice}</td>
+      <td>$${totalValue.toLocaleString()}</td>
+      <td><span class="stock-status ${statusClass}">${status}</span></td>
       <td>
-        <span class="stock-status ${sale.status === "Completed" ? "good" : "low"}">
-          ${sale.status}
-        </span>
+        <div class="action-buttons">
+          <button class="action-btn edit" title="Edit" onclick="editInventory(${item.id})">
+            <i class="fas fa-edit"></i>
+          </button>
+          <button class="action-btn delete" title="Delete" onclick="deleteInventory(${item.id})">
+            <i class="fas fa-trash"></i>
+          </button>
+        </div>
       </td>
     </tr>
-  `
-    )
-    .join("");
-}
-
-// Adverts
-function loadAdverts() {
-  renderAdvertsCards();
-}
-
-function renderAdvertsCards() {
-  const myAdvertsContainer = document.getElementById("myAdvertsContainer");
-
-  myAdvertsContainer.innerHTML = advertsData
-    .map(
-      (advert) => `
-    <div class="advert-card">
-      <div class="advert-card-image">${advert.icon}</div>
+  `;
       <div class="advert-card-body">
         <div class="advert-card-title">${advert.title}</div>
         <div class="advert-card-desc">${advert.description}</div>
@@ -807,8 +853,20 @@ function closeModal(modal) {
 
 // Utility Functions
 function showNotification(message) {
-  alert(message);
-  // In a real app, you would show a toast notification
+  // Render a non-blocking toast notification in the top-right
+  const toast = document.createElement('div');
+  toast.className = 'toast-notification';
+  toast.style.cssText = `
+    background: #111827; color: #fff; padding: 12px 16px; border-radius: 12px; box-shadow: 0 12px 40px rgba(2,6,23,0.4);
+    display: inline-flex; align-items: center; gap: 10px; font-weight:700;`;
+  toast.textContent = message;
+
+  notificationContainer.appendChild(toast);
+  setTimeout(() => {
+    toast.style.opacity = '0';
+    toast.style.transform = 'translateY(-10px)';
+  }, 2400);
+  setTimeout(() => toast.remove(), 3000);
 }
 
 function logout() {
