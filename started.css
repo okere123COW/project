@@ -488,3 +488,7 @@ textarea {
   }
 }
 
+.btn-secondary {
+  background:#b46112 ;
+  color: #111827;
+}
