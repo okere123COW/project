@@ -15,13 +15,29 @@
         font-family: "Poppins", Arial, sans-serif;
       }
 
+      :root {
+        --page-bg: #fff8e7;
+        --text: #111827;
+        --muted: #667085;
+        --card-bg: #ffffff;
+        --border: rgba(244, 180, 0, 0.18);
+        --surface: #f7f9fc;
+        --primary: #f4b400;
+        --primary-alt: #ffb703;
+        --secondary: #111827;
+        --accent: #7c3aed;
+        --shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+        --input-bg: #f8fafc;
+        --button-hover: rgba(255, 255, 255, 0.22);
+      }
+
       html {
         scroll-behavior: smooth;
       }
 
       body {
         background: linear-gradient(135deg, #f7f9fc 0%, #eef2f7 100%);
-        color: #222;
+        color: var(--text);
         line-height: 1.6;
         overflow-x: hidden;
       }
@@ -219,19 +235,21 @@
       }
 
       .btn {
-        padding: 16px 35px;
-        border-radius: 50px;
+        padding: 16px 34px;
+        border-radius: 999px;
         text-decoration: none;
         font-weight: 700;
-        transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        transition: transform 0.28s ease, box-shadow 0.28s ease, background-color 0.28s ease, color 0.28s ease;
         border: none;
         cursor: pointer;
         font-size: 16px;
         display: inline-flex;
         align-items: center;
-        gap: 8px;
+        justify-content: center;
+        gap: 10px;
         position: relative;
         overflow: hidden;
+        box-shadow: var(--shadow);
       }
 
       .btn::before {
@@ -241,41 +259,49 @@
         left: 50%;
         width: 0;
         height: 0;
-        background: rgba(255, 255, 255, 0.2);
+        background: var(--button-hover);
         border-radius: 50%;
         transform: translate(-50%, -50%);
-        transition: width 0.6s, height 0.6s;
+        transition: width 0.55s ease, height 0.55s ease, opacity 0.35s ease;
+        opacity: 0;
       }
 
       .btn:hover::before {
-        width: 300px;
-        height: 300px;
+        width: 320px;
+        height: 320px;
+        opacity: 1;
+      }
+
+      .btn:focus-visible {
+        outline: 2px solid rgba(124, 58, 237, 0.6);
+        outline-offset: 4px;
       }
 
       .btn-primary {
-        background: linear-gradient(135deg, #f4b400, #ff9800);
+        background: linear-gradient(135deg, #f4b400, #f5c43b);
         color: white;
-        box-shadow: 0 10px 30px rgba(244, 180, 0, 0.3);
+        box-shadow: 0 18px 45px rgba(244, 180, 0, 0.25);
         font-size: 1.05rem;
         padding: 18px 40px;
       }
 
       .btn-primary:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 15px 50px rgba(244, 180, 0, 0.5);
+        transform: translateY(-3px) scale(1.02);
+        box-shadow: 0 22px 56px rgba(244, 180, 0, 0.35);
       }
 
       .btn-secondary {
-        border: 2.5px solid #1c1c1c;
-        color: #1c1c1c;
-        background: white;
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+        border: 2px solid rgba(17, 24, 39, 0.15);
+        color: #111827;
+        background: rgba(255, 255, 255, 0.92);
+        box-shadow: 0 14px 30px rgba(17, 24, 39, 0.08);
       }
 
       .btn-secondary:hover {
-        background: #1c1c1c;
+        background: #111827;
         color: white;
-        transform: translateY(-4px);
+        transform: translateY(-3px) scale(1.01);
+        box-shadow: 0 22px 45px rgba(17, 24, 39, 0.18);
       }
 
       .hero-panel {
@@ -483,28 +509,65 @@
         position: fixed;
         top: 18px;
         right: 18px;
-        width: 44px;
-        height: 44px;
-        border-radius: 10px;
+        width: 46px;
+        height: 46px;
+        border-radius: 14px;
         border: none;
-        background: white;
-        color: #111;
-        box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        background: rgba(255, 255, 255, 0.98);
+        color: #111827;
+        box-shadow: 0 20px 45px rgba(17, 24, 39, 0.12);
         cursor: pointer;
         z-index: 999;
         display: flex;
         align-items: center;
         justify-content: center;
         font-size: 18px;
+        transition: transform 0.25s ease, background-color 0.25s ease, color 0.25s ease;
       }
-      #theme-toggle:hover { transform: translateY(-3px); }
+      #theme-toggle:hover {
+        transform: translateY(-3px);
+        background: #f4b400;
+        color: #111827;
+      }
 
-      /* Basic dark-mode overrides (uses CSS variables from styles.css when available) */
-      [data-theme="dark"] body { background: var(--page-bg); color: var(--text); }
-      [data-theme="dark"] .panel-card { background: var(--card-bg); border-color: rgba(255,255,255,0.03); }
-      [data-theme="dark"] .btn-primary { box-shadow: 0 10px 30px rgba(0,0,0,0.35); }
-      [data-theme="dark"] .btn-secondary { color: var(--text); border-color: var(--border); background: transparent; }
-      [data-theme="dark"] input, [data-theme="dark"] select { background: var(--input-bg); border-color: var(--border); color: var(--text); }
+      [data-theme="dark"] body {
+        background: radial-gradient(circle at top, #111827 0%, #050814 100%);
+        color: #e6eef8;
+      }
+      [data-theme="dark"] .panel-card {
+        background: rgba(10, 18, 35, 0.92);
+        border-color: rgba(124, 58, 237, 0.18);
+        box-shadow: 0 25px 80px rgba(0, 0, 0, 0.35);
+      }
+      [data-theme="dark"] .btn-primary {
+        background: linear-gradient(135deg, #7c3aed, #6d28d9);
+        box-shadow: 0 18px 40px rgba(124, 58, 237, 0.35);
+      }
+      [data-theme="dark"] .btn-secondary {
+        color: #e2e8f0;
+        border-color: rgba(148, 163, 184, 0.28);
+        background: rgba(255, 255, 255, 0.05);
+        box-shadow: 0 14px 30px rgba(15, 23, 42, 0.35);
+      }
+      [data-theme="dark"] .btn-secondary:hover {
+        background: rgba(124, 58, 237, 0.95);
+        color: white;
+      }
+      [data-theme="dark"] input,
+      [data-theme="dark"] select {
+        background: rgba(15, 23, 42, 0.9);
+        border-color: rgba(148, 163, 184, 0.22);
+        color: #e6eef8;
+      }
+      [data-theme="dark"] .password-toggle {
+        background: rgba(255, 255, 255, 0.06);
+        border-color: rgba(148, 163, 184, 0.2);
+        color: #e2e8f0;
+      }
+      [data-theme="dark"] .password-toggle:hover {
+        background: rgba(124, 58, 237, 0.95);
+        color: white;
+      }
     </style>
   </head>
   <body>
