@@ -106,16 +106,91 @@
       }
 
       .hero-content h1 {
-        font-size: 3rem;
+        font-size: 3.5rem;
         font-weight: 800;
-        margin-bottom: 20px;
+        margin-bottom: 15px;
         color: #111827;
         background: linear-gradient(135deg, #111827, #f4b400);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
-        line-height: 1.2;
+        line-height: 1.15;
         animation: slideInUp 0.8s ease 0.1s both;
+        text-transform: capitalize;
+        letter-spacing: -0.5px;
+      }
+
+      .hero-subtitle {
+        font-size: 1.3rem;
+        color: #f4b400;
+        font-weight: 600;
+        margin-bottom: 25px;
+        animation: slideInUp 0.8s ease 0.15s both;
+        letter-spacing: 0.5px;
+      }
+
+      .benefit-list {
+        list-style: none;
+        margin: 30px 0;
+        animation: slideInUp 0.8s ease 0.25s both;
+      }
+
+      .benefit-list li {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 14px;
+        font-size: 1.05rem;
+        color: #444;
+        font-weight: 500;
+      }
+
+      .benefit-list li::before {
+        content: '✓';
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 28px;
+        height: 28px;
+        background: linear-gradient(135deg, #f4b400, #ff9800);
+        color: white;
+        border-radius: 50%;
+        font-weight: bold;
+        flex-shrink: 0;
+        font-size: 14px;
+      }
+
+      .trust-badges {
+        display: flex;
+        gap: 25px;
+        margin-top: 40px;
+        padding-top: 30px;
+        border-top: 2px solid rgba(244, 180, 0, 0.2);
+        animation: slideInUp 0.8s ease 0.3s both;
+        flex-wrap: wrap;
+      }
+
+      .badge {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .badge-number {
+        font-size: 1.8rem;
+        font-weight: 800;
+        background: linear-gradient(135deg, #f4b400, #ff9800);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .badge-label {
+        font-size: 0.9rem;
+        color: #666;
+        font-weight: 500;
+        text-align: center;
       }
 
       .eyebrow {
@@ -181,11 +256,13 @@
         background: linear-gradient(135deg, #f4b400, #ff9800);
         color: white;
         box-shadow: 0 10px 30px rgba(244, 180, 0, 0.3);
+        font-size: 1.05rem;
+        padding: 18px 40px;
       }
 
       .btn-primary:hover {
         transform: translateY(-4px);
-        box-shadow: 0 15px 40px rgba(244, 180, 0, 0.4);
+        box-shadow: 0 15px 50px rgba(244, 180, 0, 0.5);
       }
 
       .btn-secondary {
@@ -206,35 +283,81 @@
       }
 
       .panel-card {
-        background: white;
+        background: linear-gradient(135deg, #ffffff 0%, #fafbff 100%);
         border-radius: 25px;
-        padding: 40px 35px;
+        padding: 45px 40px;
         box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
-        border: 2px solid rgba(244, 180, 0, 0.1);
+        border: 2px solid rgba(244, 180, 0, 0.15);
         transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .panel-card::before {
+        content: '';
+        position: absolute;
+        top: -100%;
+        right: -100%;
+        width: 200px;
+        height: 200px;
+        background: radial-gradient(circle, rgba(244, 180, 0, 0.1) 0%, transparent 70%);
+        border-radius: 50%;
+        pointer-events: none;
       }
 
       .panel-card:hover {
         border-color: #f4b400;
-        box-shadow: 0 25px 70px rgba(244, 180, 0, 0.15);
+        box-shadow: 0 30px 80px rgba(244, 180, 0, 0.2);
+        transform: translateY(-5px);
       }
 
       .panel-card h2 {
-        font-size: 1.8rem;
-        margin-bottom: 15px;
+        font-size: 1.95rem;
+        margin-bottom: 10px;
         color: #111827;
         font-weight: 700;
+        position: relative;
+        z-index: 1;
+      }
+
+      .panel-card-subtitle {
+        font-size: 0.95rem;
+        color: #f4b400;
+        font-weight: 600;
+        margin-bottom: 20px;
+        position: relative;
+        z-index: 1;
       }
 
       .panel-card p {
         color: #666;
         margin-bottom: 15px;
         line-height: 1.7;
+        position: relative;
+        z-index: 1;
+      }
+
+      .form-benefits {
+        background: rgba(244, 180, 0, 0.08);
+        border-left: 4px solid #f4b400;
+        padding: 15px;
+        border-radius: 12px;
+        margin-bottom: 20px;
+        font-size: 0.95rem;
+        color: #444;
+        position: relative;
+        z-index: 1;
+      }
+
+      .form-benefits strong {
+        color: #111827;
       }
 
       form {
         display: grid;
         gap: 15px;
+        position: relative;
+        z-index: 1;
       }
 
       label {
@@ -320,10 +443,31 @@
           grid-template-columns: 1fr;
           padding: 40px 0;
           min-height: auto;
+          gap: 30px;
         }
 
         .hero-content h1 {
-          font-size: 2rem;
+          font-size: 2.2rem;
+        }
+
+        .hero-subtitle {
+          font-size: 1.1rem;
+        }
+
+        .benefit-list li {
+          font-size: 0.95rem;
+        }
+
+        .trust-badges {
+          gap: 15px;
+        }
+
+        .badge-number {
+          font-size: 1.5rem;
+        }
+
+        .badge-label {
+          font-size: 0.8rem;
         }
 
         .scroll-to-top {
@@ -340,43 +484,70 @@
     <div class="container">
       <div class="hero-content">
         <div>
-          <p class="eyebrow"> BEEZBIZZ FOUNDATION</p>
-          <h1>Empower Your Business Journey</h1>
+          <p class="eyebrow">🚀 BEEZBIZZ FOUNDATION</p>
+          <h1>Turn Your Idea Into a Thriving Business</h1>
+          <p class="hero-subtitle">Join thousands of entrepreneurs building their success story</p>
           <p class="hero-copy">
-            A comprehensive platform for young and experienced entrepreneurs to launch, manage, and grow their successful businesses with expert guidance and powerful tools.
+            Everything you need to launch, manage, and scale your business—all in one powerful platform with expert guidance, intuitive tools, and a supportive community.
           </p>
-          <div class="hero-actions">
-            <a class="btn btn-secondary" href="services.html"> Explore Features</a>
+          <ul class="benefit-list">
+            <li>Launch in minutes with our guided setup</li>
+            <li>Access 500+ services from expert freelancers</li>
+            <li>Built-in marketing & growth tools</li>
+            <li>24/7 dedicated support team</li>
+          </ul>
+          <div class="trust-badges">
+            <div class="badge">
+              <div class="badge-number">10K+</div>
+              <div class="badge-label">Active Businesses</div>
+            </div>
+            <div class="badge">
+              <div class="badge-number">$50M+</div>
+              <div class="badge-label">Revenue Generated</div>
+            </div>
+            <div class="badge">
+              <div class="badge-number">4.9★</div>
+              <div class="badge-label">Customer Rating</div>
+            </div>
+          </div>
+          <div class="hero-actions" style="margin-top: 35px;">
+            <a class="btn btn-primary" href="#signup">Start Free Now</a>
+            <a class="btn btn-secondary" href="services.html">Explore Features</a>
           </div>
         </div>
         <div class="hero-panel">
           <div class="panel-card">
-            <h2> Start Your Journey</h2>
-            <p>Tell us about your business and we'll help you set up and succeed in minutes.</p>
-            <p style="font-size: 0.9rem; color: #f4b400; font-weight: 600; margin-bottom: 20px;">Share your business idea with us</p>
+            <h2>🎯 Start Your Journey</h2>
+            <p class="panel-card-subtitle">Free forever. No credit card required.</p>
+            <p>Create your business account in seconds and get instant access to our full suite of tools and resources.</p>
+            <div class="form-benefits">
+              <strong>✨ What you'll get:</strong> Free shop setup, marketing tools, analytics dashboard & business mentoring
+            </div>
             <form id="shop-form" novalidate>
-              <label for="business-name">Business Name</label>
-              <input id="business-name" name="businessName" type="text" placeholder="Example: Honey Hive Co." required />
+              <label for="business-name">👤 Business Name</label>
+              <input id="business-name" name="businessName" type="text" placeholder="e.g., Honey Hive Co. or Your Name" required />
 
-              <label for="business-email">Email Address</label>
-              <input id="business-email" name="email" type="email" placeholder="you@example.com" required />
+              <label for="business-email">📧 Email Address</label>
+              <input id="business-email" name="email" type="email" placeholder="your@email.com" required />
 
-              <label for="business-password">Create Password</label>
+              <label for="business-password">🔒 Create Password</label>
               <div class="password-field">
-                <input id="business-password" name="password" type="password" placeholder="Create a strong password" required />
+                <input id="business-password" name="password" type="password" placeholder="Min. 8 characters" required />
                 <button type="button" id="toggle-password" class="password-toggle" aria-label="Show password">Show</button>
               </div>
               <p id="password-strength" class="form-note">Use at least 8 characters, including a number or symbol.</p>
 
-              <label for="business-category">Category</label>
+              <label for="business-category">🏢 Business Category</label>
               <select id="business-category" name="category">
-                <option value="">Select a category</option>
-                <option value="retail">Retail</option>
-                <option value="services">Services</option>
-                <option value="technology">Technology</option>
+                <option value="">What's your business type?</option>
+                <option value="retail">🛍️ Retail & E-commerce</option>
+                <option value="services">💼 Services & Consulting</option>
+                <option value="technology">💻 Technology & Software</option>
+                <option value="creative">🎨 Creative & Design</option>
+                <option value="other">✨ Other</option>
               </select>
 
-              <button type="submit" class="btn btn-primary"> Create My Shop</button>
+              <button type="submit" class="btn btn-primary">🚀 Create My Shop Free</button>
               <div id="form-message" class="form-message" aria-live="polite"></div>
             </form>
           </div>
