@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="advertise.css">
 </head>
 <body>
+  <button id="theme-toggle" aria-label="Toggle theme">🌙</button>
   <!-- Navigation -->
   <nav class="navbar">
     <div class="navbar-container">
@@ -172,6 +173,17 @@
     <p>&copy; 2026 Beez Bizz Marketplace. All rights reserved.</p>
   </footer>
 
+  <script>
+    (function(){
+      const root=document.documentElement;
+      const btn=document.getElementById('theme-toggle');
+      function applyTheme(theme){ if(theme==='dark'){root.setAttribute('data-theme','dark'); btn.textContent='☀️';} else {root.removeAttribute('data-theme'); btn.textContent='🌙';} }
+      const saved=localStorage.getItem('theme');
+      if(saved) applyTheme(saved);
+      else if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) applyTheme('dark');
+      if(btn) btn.addEventListener('click', ()=>{ const isDark = root.getAttribute('data-theme') === 'dark'; const next = isDark ? 'light' : 'dark'; applyTheme(next); localStorage.setItem('theme', next); });
+    })();
+  </script>
   <script src="advertise.js"></script>
 </body>
 </html>
