@@ -1,3 +1,20 @@
+// Initialize theme preference for pages that include this script
+(function() {
+  try {
+    const root = document.documentElement;
+    const saved = localStorage.getItem('theme');
+    if (saved === 'dark') root.setAttribute('data-theme', 'dark');
+    else if (saved === 'light') root.removeAttribute('data-theme');
+    else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      root.setAttribute('data-theme', 'dark');
+    }
+    const toggle = document.getElementById('theme-toggle');
+    if (toggle) toggle.textContent = root.getAttribute('data-theme') === 'dark' ? '☀️' : '🌙';
+  } catch (e) {
+    // silent
+  }
+})();
+
 const form = document.getElementById('shop-form');
 const businessNameInput = document.getElementById('business-name');
 const emailInput = document.getElementById('business-email');
