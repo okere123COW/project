@@ -25,6 +25,8 @@ const categoryNote = document.getElementById('category-note');
 const passwordStrength = document.getElementById('password-strength');
 const passwordToggle = document.getElementById('toggle-password');
 
+const API_URL = 'https://0.0.0.0:8000'; // Replace with your actual API endpoint
+
 const categoryHints = {
   start: 'New businesses get a launch checklist and guided tools to get going fast.',
   about: 'We help you plan, promote, and grow your brand with expert support.',
@@ -136,3 +138,4 @@ form.addEventListener('submit', (event) => {
 
 updateCategoryHint();
 updatePasswordStrength('');
+const api
