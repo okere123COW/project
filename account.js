@@ -314,7 +314,7 @@ const advertsData = [
     status: "active",
     views: 342,
     clicks: 45,
-    icon: "🌐",
+    icon: "",
   },
   {
     id: 2,
@@ -325,7 +325,7 @@ const advertsData = [
     status: "active",
     views: 521,
     clicks: 87,
-    icon: "🎨",
+    icon: "",
   },
   {
     id: 3,
@@ -336,7 +336,7 @@ const advertsData = [
     status: "paused",
     views: 215,
     clicks: 28,
-    icon: "📈",
+    icon: "",
   },
 ];
 
