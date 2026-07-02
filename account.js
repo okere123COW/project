@@ -1,3 +1,7 @@
+// ============================================================================
+// BUSINESS DASHBOARD - ACCOUNT PAGE SCRIPT
+// ============================================================================
+
 // Sample Business Data
 const businessData = {
   owner: {
@@ -952,9 +956,15 @@ function createAdvert(e) {
   advertsData.push(newAdvert);
   renderAdvertsCards();
   closeModal(createAdvertModal);
-  document.getElementById("createAdvertForm").reset();
+  const createAdvertForm = document.getElementById("createAdvertForm");
+  if (createAdvertForm) createAdvertForm.reset();
   showNotification("✓ Advert created successfully!", "success");
-// Adverts
+}
+
+// ============================================================================
+// ADVERTS - LOAD AND RENDER
+// ============================================================================
+
 function loadAdverts() {
   renderAdvertsCards();
 }
@@ -1094,6 +1104,7 @@ function filterAdverts() {
         <div class="advert-card-meta" style="display: flex; gap: 12px;">
           <span><i class="fas fa-eye"></i> ${advert.views}</span>
           <span><i class="fas fa-hand-pointer"></i> ${advert.clicks}</span>
+          <span><i class="fas fa-percentage"></i> ${ctr}%</span>
         </div>
         <div class="advert-card-price">$${advert.price}</div>
       </div>
@@ -1101,112 +1112,136 @@ function filterAdverts() {
   `;
   }).join("");
 }
-}
 
-function editAdvert(id) {
-  alert("Edit functionality for advert ID: " + id);
-}
+// ============================================================================
+// BRANCHES
+// ============================================================================
 
-function deleteAdvert(id) {
-  if (confirm("Are you sure you want to delete this advert?")) {
-    const index = advertsData.findIndex((advert) => advert.id === id);
-    if (index > -1) {
-      advertsData.splice(index, 1);
-      renderAdvertsCards();
-      showNotification("Advert deleted successfully!");
-    }
-  }
-}
-
-function filterAdverts() {
-  const searchTerm = document.getElementById("advertSearch").value.toLowerCase();
-  const status = document.getElementById("advertFilter").value;
-
-  const filtered = advertsData.filter((advert) => {
-    const matchSearch = advert.title.toLowerCase().includes(searchTerm);
-    const matchStatus = !status || advert.status === status;
-    return matchSearch && matchStatus;
-  });
-
-  const myAdvertsContainer = document.getElementById("myAdvertsContainer");
-
-  if (filtered.length === 0) {
-    myAdvertsContainer.innerHTML = `
-      <div style="grid-column: 1/-1; text-align: center; padding: 2rem; color: #999;">
-        <i class="fas fa-search"></i> No adverts found
-      </div>
-    `;
-    return;
-  }
-
-  myAdvertsContainer.innerHTML = filtered
-    .map(
-      (advert) => `
-    <div class="advert-card">
-      <div class="advert-card-image">${advert.icon}</div>
-      <div class="advert-card-body">
-        <div class="advert-card-title">${advert.title}</div>
-        <div class="advert-card-desc">${advert.description}</div>
-        <div class="advert-card-meta">
-          <span>${advert.views} views</span>
-          <span>${advert.clicks} clicks</span>
-        </div>
-        <div class="advert-card-price">$${advert.price}</div>
-        <div class="advert-card-actions">
-          <button onclick="editAdvert(${advert.id})" title="Edit">
-            <i class="fas fa-edit"></i> Edit
-          </button>
-          <button class="delete-btn" onclick="deleteAdvert(${advert.id})" title="Delete">
-            <i class="fas fa-trash"></i> Delete
-          </button>
-        </div>
-      </div>
-    </div>
-  `
-    )
-    .join("");
-}
-
-// Branches
 function loadBranches() {
   renderBranchCards();
 }
 
 function renderBranchCards() {
   const branchesContainer = document.getElementById("branchesContainer");
+  if (!branchesContainer) return;
 
   branchesContainer.innerHTML = branchesData
-    .map(
-      (branch) => `
-    <div class="branch-card">
-      <div class="branch-icon">
-        <i class="fas fa-map-marker-alt"></i>
+    .map((branch, idx) => `
+    <div class="branch-card fade-in-animation" style="animation-delay: ${idx * 100}ms" data-id="${branch.id}">
+      <div class="branch-icon" style="font-size: 2rem; margin-bottom: 10px;">🏢</div>
+      <div class="branch-card-name">${branch.name}</div>
+      <div class="branch-card-info">
+        <p><strong>📍 Address:</strong> ${branch.address}</p>
+        <p><strong>🏙️ City:</strong> ${branch.city}</p>
+        <p><strong>📞 Phone:</strong> ${branch.phone}</p>
       </div>
-      <div class="branch-name">${branch.name}</div>
-      <div class="branch-info">
-        <i class="fas fa-map-pin"></i> ${branch.address}
-      </div>
-      <div class="branch-info">
-        <i class="fas fa-city"></i> ${branch.city}
-      </div>
-      <div class="branch-info">
-        <i class="fas fa-phone"></i> ${branch.phone}
-      </div>
-      <div class="branch-info">
-        <i class="fas fa-check-circle"></i> ${branch.status}
-      </div>
-      <div class="branch-actions">
-        <button onclick="editBranch(${branch.id})">
-          <i class="fas fa-edit"></i> Edit
-        </button>
-        <button onclick="deleteBranch(${branch.id})">
-          <i class="fas fa-trash"></i> Delete
-        </button>
+      <div class="branch-status-badge">${branch.status}</div>
+      <div class="branch-card-actions" style="display: flex; gap: 8px; margin-top: 10px;">
+        <button style="flex: 1; background: #f4b400; color: #222; border: none; padding: 8px; border-radius: 4px; cursor: pointer;" onclick="editBranch(${branch.id})"><i class="fas fa-edit"></i> Edit</button>
+        <button style="flex: 1; background: #f44336; color: white; border: none; padding: 8px; border-radius: 4px; cursor: pointer;" onclick="deleteBranch(${branch.id})"><i class="fas fa-trash"></i> Delete</button>
       </div>
     </div>
-  `
-    )
+  `)
     .join("");
+}
+
+function addBranch(e) {
+  e.preventDefault();
+
+  const branchNameEl = document.getElementById("branchName");
+  const branchAddressEl = document.getElementById("branchAddress");
+  const branchCityEl = document.getElementById("branchCity");
+  const branchPhoneEl = document.getElementById("branchPhone");
+
+  if (!branchNameEl || !branchAddressEl || !branchCityEl || !branchPhoneEl) return;
+
+  const newBranch = {
+    id: Math.max(...branchesData.map(b => b.id), 0) + 1,
+    name: branchNameEl.value,
+    address: branchAddressEl.value,
+    city: branchCityEl.value,
+    phone: branchPhoneEl.value,
+    status: "Active",
+  };
+
+  branchesData.push(newBranch);
+  renderBranchCards();
+  closeModal(addBranchModal);
+  const addBranchForm = document.getElementById("addBranchForm");
+  if (addBranchForm) addBranchForm.reset();
+  showNotification("✓ Branch added successfully!", "success");
+}
+
+function editBranch(id) {
+  const branch = branchesData.find(b => b.id === id);
+  if (!branch) return;
+
+  const branchNameEl = document.getElementById("branchName");
+  const branchAddressEl = document.getElementById("branchAddress");
+  const branchCityEl = document.getElementById("branchCity");
+  const branchPhoneEl = document.getElementById("branchPhone");
+
+  if (branchNameEl) branchNameEl.value = branch.name;
+  if (branchAddressEl) branchAddressEl.value = branch.address;
+  if (branchCityEl) branchCityEl.value = branch.city;
+  if (branchPhoneEl) branchPhoneEl.value = branch.phone;
+
+  openModal(addBranchModal);
+  showNotification(`Editing: ${branch.name}`);
+}
+
+function deleteBranch(id) {
+  const branch = branchesData.find(b => b.id === id);
+  if (!branch) return;
+
+  if (confirm(`Are you sure you want to delete "${branch.name}"?`)) {
+    const index = branchesData.findIndex(b => b.id === id);
+    if (index > -1) {
+      branchesData.splice(index, 1);
+      renderBranchCards();
+      showNotification("✓ Branch deleted successfully!", "success");
+    }
+  }
+}
+
+// ============================================================================
+// SETTINGS
+// ============================================================================
+
+function saveBusiness(e) {
+  e.preventDefault();
+
+  const businessNameEl = document.getElementById("businessName");
+  const businessCategoryEl = document.getElementById("businessCategory");
+  const businessRatingEl = document.getElementById("businessRating");
+  const ownerNameEl = document.getElementById("ownerName");
+  const ownerEmailEl = document.getElementById("ownerEmail");
+
+  if (businessNameEl) businessData.business.name = businessNameEl.value;
+  if (businessCategoryEl) businessData.business.category = businessCategoryEl.value;
+  if (businessRatingEl) businessData.business.rating = parseFloat(businessRatingEl.value);
+  if (ownerNameEl) businessData.owner.name = ownerNameEl.value;
+  if (ownerEmailEl) businessData.owner.email = ownerEmailEl.value;
+
+  localStorage.setItem('businessData', JSON.stringify(businessData));
+  updateUserInfo();
+  showNotification("✓ Business settings saved!", "success");
+}
+
+// ============================================================================
+// UTILITY - LOGOUT
+// ============================================================================
+
+function logout() {
+  if (confirm("Are you sure you want to logout?")) {
+    localStorage.removeItem('businessData');
+    localStorage.removeItem('theme');
+    localStorage.removeItem('notifications');
+    showNotification("Logging out...");
+    setTimeout(() => {
+      window.location.href = 'index.html';
+    }, 1000);
+  }
 }
 
 function addBranch(e) {
@@ -1233,191 +1268,61 @@ function editBranch(id) {
 }
 
 function deleteBranch(id) {
-  if (confirm("Are you sure you want to delete this branch?")) {
-    const index = branchesData.findIndex((branch) => branch.id === id);
+  const branch = branchesData.find(b => b.id === id);
+  if (!branch) return;
+
+  if (confirm(`Are you sure you want to delete "${branch.name}"?`)) {
+    const index = branchesData.findIndex(b => b.id === id);
     if (index > -1) {
       branchesData.splice(index, 1);
       renderBranchCards();
-      showNotification("Branch deleted successfully!");
-    // Branches
-    function loadBranches() {
-      renderBranchCards();
-    }
-
-    function renderBranchCards() {
-      const branchesContainer = document.getElementById("branchesContainer");
-      if (!branchesContainer) return;
-
-      branchesContainer.innerHTML = branchesData
-        .map((branch, idx) => `
-        <div class="branch-card fade-in-animation" style="animation-delay: ${idx * 100}ms; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 12px 30px rgba(244, 180, 0, 0.15)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='var(--shadow)'">
-          <div class="branch-icon" style="font-size: 2rem; margin-bottom: 10px;">
-            <i class="fas fa-map-marker-alt"></i>
-          </div>
-          <div class="branch-name" style="font-weight: 600; font-size: 1.1rem; margin-bottom: 10px;">${branch.name}</div>
-          <div class="branch-info" style="font-size: 0.9rem; color: #666; margin: 6px 0;">
-            <i class="fas fa-map-pin" style="color: #f4b400;"></i> ${branch.address}
-          </div>
-          <div class="branch-info" style="font-size: 0.9rem; color: #666; margin: 6px 0;">
-            <i class="fas fa-city" style="color: #2196f3;"></i> ${branch.city}
-          </div>
-          <div class="branch-info" style="font-size: 0.9rem; color: #666; margin: 6px 0;">
-            <i class="fas fa-phone" style="color: #4caf50;"></i> <a href="tel:${branch.phone}" style="color: #2196f3; text-decoration: none;">${branch.phone}</a>
-          </div>
-          <div class="branch-info" style="font-size: 0.9rem; color: #4caf50; margin: 10px 0; font-weight: 600;">
-            <i class="fas fa-check-circle"></i> ${branch.status}
-          </div>
-          <div class="branch-actions" style="display: flex; gap: 8px; margin-top: 12px;">
-            <button class="tooltip" style="flex: 1; background: #2196f3; color: white; border: none; padding: 8px; border-radius: 4px; cursor: pointer; transition: 0.2s;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'" onclick="editBranch(${branch.id})">
-              <i class="fas fa-edit"></i> Edit
-              <span class="tooltiptext">Edit Branch</span>
-            </button>
-            <button class="tooltip" style="flex: 1; background: #f44336; color: white; border: none; padding: 8px; border-radius: 4px; cursor: pointer; transition: 0.2s;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'" onclick="deleteBranch(${branch.id})">
-              <i class="fas fa-trash"></i> Delete
-              <span class="tooltiptext">Delete Branch</span>
-            </button>
-          </div>
-        </div>
-      `)
-        .join("");
-    }
-
-    function addBranch(e) {
-      e.preventDefault();
-
-      const newBranch = {
-        id: Math.max(...branchesData.map(b => b.id), 0) + 1,
-        name: document.getElementById("branchName").value,
-        address: document.getElementById("branchAddress").value,
-        city: document.getElementById("branchCity").value,
-        phone: document.getElementById("branchPhone").value,
-        status: "Active",
-      };
-
-      branchesData.push(newBranch);
-      renderBranchCards();
-      closeModal(addBranchModal);
-      document.getElementById("addBranchForm").reset();
-      showNotification("✓ Branch registered successfully!", "success");
-    }
-
-    function editBranch(id) {
-      const branch = branchesData.find(b => b.id === id);
-      if (!branch) return;
-  
-      document.getElementById("branchName").value = branch.name;
-      document.getElementById("branchAddress").value = branch.address;
-      document.getElementById("branchCity").value = branch.city;
-      document.getElementById("branchPhone").value = branch.phone;
-      showNotification(`Editing: ${branch.name}`);
-      openModal(addBranchModal);
-    }
-
-    function deleteBranch(id) {
-      const branch = branchesData.find(b => b.id === id);
-      if (!branch) return;
-  
-      if (confirm(`Delete branch "${branch.name}"?`)) {
-        const index = branchesData.findIndex((b) => b.id === id);
-        if (index > -1) {
-          branchesData.splice(index, 1);
-          renderBranchCards();
-          showNotification("✓ Branch deleted!", "success");
-        }
-      }
-    }
+      showNotification("✓ Branch deleted successfully!", "success");
     }
   }
 }
 
-// Settings
+// ============================================================================
+// SETTINGS
+// ============================================================================
+
 function saveBusiness(e) {
   e.preventDefault();
 
-  businessData.business.name = document.getElementById("businessName").value;
-  businessData.owner.email = document.getElementById("businessEmail").value;
-  businessData.business.category = document.getElementById("businessCategory").value;
+  const businessNameEl = document.getElementById("businessName");
+  const businessEmailEl = document.getElementById("businessEmail");
+  const businessCategoryEl = document.getElementById("businessCategory");
 
-  showNotification("Business profile updated successfully!");
-}
-
-// Modal Functions
-function openModal(modal) {
-  modal.classList.add("active");
-}
-
-function closeModal(modal) {
-  modal.classList.remove("active");
-}
-
-// Utility Functions
-function showNotification(message) {
-  // Render a non-blocking toast notification in the top-right
-  const toast = document.createElement('div');
-  toast.className = 'toast-notification';
-  toast.style.cssText = `
-    background: #111827; color: #fff; padding: 12px 16px; border-radius: 12px; box-shadow: 0 12px 40px rgba(2,6,23,0.4);
-    display: inline-flex; align-items: center; gap: 10px; font-weight:700;`;
-  toast.textContent = message;
-
-  notificationContainer.appendChild(toast);
-  setTimeout(() => {
-    toast.style.opacity = '0';
-    toast.style.transform = 'translateY(-10px)';
-  }, 2400);
-  setTimeout(() => toast.remove(), 3000);
-}
-
-function logout() {
-  if (confirm("Are you sure you want to logout?")) {
-    localStorage.removeItem("userSession");
-    window.location.href = "index.html";
-  }
-}
-
-// Redirect from registration
-// When user completes registration, redirect them to this page
-function redirectFromRegistration() {
-  const userRegistered = localStorage.getItem("userRegistered");
-  if (userRegistered) {
-    localStorage.removeItem("userRegistered");
-    const firstMenuItem = document.querySelector(".menu-item");
-    firstMenuItem.click();
-  }
-}
-
-redirectFromRegistration();
-
-// Settings
-function saveBusiness(e) {
-  e.preventDefault();
-
-  businessData.business.name = document.getElementById("businessName").value;
-  businessData.owner.email = document.getElementById("businessEmail").value;
-  businessData.business.category = document.getElementById("businessCategory").value;
+  if (businessNameEl) businessData.business.name = businessNameEl.value;
+  if (businessEmailEl) businessData.owner.email = businessEmailEl.value;
+  if (businessCategoryEl) businessData.business.category = businessCategoryEl.value;
 
   showNotification("✓ Business profile updated!", "success");
   localStorage.setItem('businessData', JSON.stringify(businessData));
 }
 
-// Modal Functions
+// ============================================================================
+// MODAL FUNCTIONS
+// ============================================================================
+
 function openModal(modal) {
+  if (!modal) return;
   modal.classList.add("active");
   modal.style.animation = "fadeIn 0.3s ease-out";
-  // Prevent body scroll
   document.body.style.overflow = "hidden";
 }
 
 function closeModal(modal) {
+  if (!modal) return;
   modal.classList.remove("active");
   modal.style.animation = "none";
-  // Re-enable body scroll
   document.body.style.overflow = "auto";
 }
 
-// Utility Functions
+// ============================================================================
+// UTILITY FUNCTIONS
+// ============================================================================
+
 function showNotification(message, type = "info") {
-  // Render a non-blocking toast notification in the top-right
   const toast = document.createElement('div');
   toast.className = 'toast-notification';
   
@@ -1456,3 +1361,30 @@ function showNotification(message, type = "info") {
   }, 2500);
   setTimeout(() => toast.remove(), 2800);
 }
+
+function logout() {
+  if (confirm("Are you sure you want to logout?")) {
+    localStorage.removeItem('businessData');
+    localStorage.removeItem('theme');
+    localStorage.removeItem('notifications');
+    showNotification("Logging out...");
+    setTimeout(() => {
+      window.location.href = 'index.html';
+    }, 1000);
+  }
+}
+
+// ============================================================================
+// INITIALIZATION - PAGE LOAD
+// ============================================================================
+
+function redirectFromRegistration() {
+  const userRegistered = localStorage.getItem("userRegistered");
+  if (userRegistered) {
+    localStorage.removeItem("userRegistered");
+    const firstMenuItem = document.querySelector(".menu-item");
+    if (firstMenuItem) firstMenuItem.click();
+  }
+}
+
+redirectFromRegistration();
