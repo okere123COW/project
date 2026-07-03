@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkout Payment</title>
+
+<link rel="stylesheet" href="payment.css">
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+</head>
+<body>
+
+<div class="checkout">
+
+<h1>Secure Checkout</h1>
+
+<div class="total">
+Total Amount
+<h2>KES 2,450</h2>
+</div>
+
+<div class="payment-options">
+
+<label class="option">
+<input type="radio" name="payment" value="card" checked>
+<i class="fa-solid fa-credit-card"></i>
+Debit / Credit Card
+</label>
+
+<label class="option">
+<input type="radio" name="payment" value="mpesa">
+<i class="fa-solid fa-mobile-screen"></i>
+M-Pesa
+</label>
+
+<label class="option">
+<input type="radio" name="payment" value="paypal">
+<i class="fa-brands fa-paypal"></i>
+PayPal
+</label>
+
+</div>
+
+<!-- Card Form -->
+
+<div id="cardForm" class="payment-form">
+
+<input type="text" placeholder="Card Holder Name">
+
+<input type="text" maxlength="19"
+placeholder="Card Number">
+
+<div class="row">
+
+<input type="text" placeholder="MM/YY">
+
+<input type="password" maxlength="4"
+placeholder="CVV">
+
+</div>
+
+</div>
+
+<!-- Mpesa -->
+
+<div id="mpesaForm" class="payment-form hidden">
+
+<input type="text"
+placeholder="07XXXXXXXX">
+
+<button class="pay-btn">
+Request STK Push
+</button>
+
+</div>
+
+<!-- PayPal -->
+
+<div id="paypalForm"
+class="payment-form hidden">
+
+<p>You will be redirected to PayPal.</p>
+
+<button class="paypal-btn">
+Continue with PayPal
+</button>
+
+</div>
+
+<button id="payNow" class="main-btn">
+Pay Now
+</button>
+
+</div>
+
+<script src="payment.js"></script>
+
+</body>
+</html>

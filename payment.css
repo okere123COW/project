@@ -1,0 +1,168 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    background:#111111;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    color:white;
+}
+
+/* Checkout Card */
+
+.checkout{
+    width:430px;
+    background:#1b1b1b;
+    padding:35px;
+    border-radius:18px;
+    border:2px solid #FFC107;
+    box-shadow:0 15px 40px rgba(255,193,7,.25);
+}
+
+.checkout h1{
+    text-align:center;
+    color:#FFC107;
+    margin-bottom:25px;
+    letter-spacing:1px;
+}
+
+.total{
+    background:#FFC107;
+    color:#111;
+    padding:18px;
+    border-radius:12px;
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.total h2{
+    margin-top:8px;
+}
+
+/* Payment Methods */
+
+.payment-options{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+    margin-bottom:25px;
+}
+
+.option{
+    padding:15px;
+    border:2px solid #333;
+    border-radius:12px;
+    cursor:pointer;
+    transition:.3s;
+    color:white;
+    background:#222;
+}
+
+.option:hover{
+    border-color:#FFC107;
+    background:#2d2d2d;
+}
+
+.option input{
+    margin-right:10px;
+    accent-color:#FFC107;
+}
+
+.option i{
+    color:#FFC107;
+    margin-right:8px;
+}
+
+/* Forms */
+
+.payment-form{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+    margin-bottom:25px;
+}
+
+.payment-form input{
+    padding:14px;
+    border-radius:10px;
+    border:1px solid #555;
+    background:#2a2a2a;
+    color:white;
+    font-size:15px;
+}
+
+.payment-form input::placeholder{
+    color:#aaa;
+}
+
+.payment-form input:focus{
+    outline:none;
+    border-color:#FFC107;
+    box-shadow:0 0 10px rgba(255,193,7,.4);
+}
+
+.row{
+    display:flex;
+    gap:12px;
+}
+
+.hidden{
+    display:none;
+}
+
+/* Buttons */
+
+.main-btn{
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:10px;
+    background:#FFC107;
+    color:#111;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.main-btn:hover{
+    transform:translateY(-3px);
+    background:#FFD54F;
+    box-shadow:0 8px 20px rgba(255,193,7,.4);
+}
+
+.pay-btn,
+.paypal-btn{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:10px;
+    background:#FFC107;
+    color:#111;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.pay-btn:hover,
+.paypal-btn:hover{
+    background:#FFD54F;
+}
+
+@media(max-width:500px){
+
+.checkout{
+    width:95%;
+    padding:25px;
+}
+
+.row{
+    flex-direction:column;
+}
+
+}
