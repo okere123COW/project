@@ -154,6 +154,35 @@ body{
     background:#FFD54F;
 }
 
+/* Post Payment Actions */
+
+.post-payment-actions{
+    margin-top:20px;
+    text-align:center;
+}
+
+.browse-btn{
+    display:inline-block;
+    width:100%;
+    padding:15px;
+    border:2px solid #FFC107;
+    border-radius:10px;
+    background:transparent;
+    color:#FFC107;
+    font-size:16px;
+    font-weight:bold;
+    text-decoration:none;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.browse-btn:hover{
+    background:#FFC107;
+    color:#111;
+    transform:translateY(-3px);
+    box-shadow:0 8px 20px rgba(255,193,7,.4);
+}
+
 @media(max-width:500px){
 
 .checkout{
