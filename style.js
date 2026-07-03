@@ -220,6 +220,7 @@ body {
 .hero-actions {
   display: flex;
   gap: 20px;
+  margin-top: 35px;
   flex-wrap: wrap;
   animation: slideInUp 0.8s ease 0.3s both;
 }

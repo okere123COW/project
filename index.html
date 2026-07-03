@@ -9,13 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="style.js"></script>
     <script src="api.js"></script>
-    <!--
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: "Poppins", Arial, sans-serif;
-      }
+    <style>
 
       :root {
         --page-bg: #fff8e7;
@@ -587,19 +581,7 @@
         background: rgba(124, 58, 237, 0.95);
         color: white;
       }
-.hero {
-  opacity: 0;
-  transform: translateY(30px);
-  animation: fadeUp 1s ease forwards;
-}
-
-@keyframes fadeUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-    -->
+      </style>
   </head>
   <body>
     <button id="theme-toggle" aria-label="Toggle theme">🌙</button>
@@ -632,7 +614,7 @@
               <div class="badge-label">Customer Rating</div>
             </div>
           </div>
-          <div class="hero-actions" style="margin-top: 35px;">
+          <div class="hero-actions">
             <a class="btn btn-primary" href="#signup">Start Free Now</a>
             <a class="btn btn-secondary" href="services.html">Explore Features</a>
           </div>
@@ -746,14 +728,16 @@
       const form = document.getElementById('shop-form');
       const formMessage = document.getElementById('form-message');
 
-      form.addEventListener('submit', function(e) {
+      form.addEventListener('submit', async function(e) {
         e.preventDefault();
         
         const businessName = document.getElementById('business-name').value;
         const email = document.getElementById('business-email').value;
         const password = document.getElementById('business-password').value;
 
-        if (!businessName || !email || !password) {
+        const category = document.getElementById('business-category').value;
+
+        if (!businessName || !email || !password || !category) {
           showMessage('Please fill in all required fields.', 'error');
           return;
         }
@@ -763,10 +747,27 @@
           return;
         }
 
-        showMessage('✅ Account created successfully! Redirecting...', 'success');
-        setTimeout(() => {
-          window.location.href = 'home.html';
-        }, 2000);
+        showMessage('Submitting your details…', 'success');
+
+        try {
+          const response = await registerBusiness({
+            businessName,
+            email,
+            password,
+            category
+          });
+
+          if (response.success) {
+            showMessage('✅ Account created successfully! Redirecting...', 'success');
+            setTimeout(() => {
+              window.location.href = 'home.html';
+            }, 2000);
+          } else {
+            showMessage(response.data?.message || 'Submission failed. Please try again.', 'error');
+          }
+        } catch (error) {
+          showMessage('Submission failed. Please try again.', 'error');
+        }
       });
 
       function showMessage(text, type) {
