@@ -402,6 +402,7 @@ function createAdvertCard(advert) {
         <div class="advert-footer">
           <div class="advert-price">$${advert.price}</div>
           <button class="advert-action" data-id="${advert.id}">
+         <href="payment.html">
             <i class="fas fa-shopping-cart"></i> View
           </button>
         </div>
