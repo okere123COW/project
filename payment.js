@@ -1,8 +1,19 @@
+const params = new URLSearchParams(window.location.search);
+const selectedItemName = params.get("item") || "Your selected advert";
+const selectedPrice = Number(params.get("price")) || 2450;
+
 const methods = document.querySelectorAll("input[name='payment']");
 
 const card = document.getElementById("cardForm");
 const mpesa = document.getElementById("mpesaForm");
 const paypal = document.getElementById("paypalForm");
+const selectedItemEl = document.getElementById("selectedItem");
+const selectedPriceEl = document.getElementById("selectedPrice");
+const totalAmountEl = document.getElementById("totalAmount");
+
+selectedItemEl.textContent = selectedItemName;
+selectedPriceEl.textContent = `Price: KES ${selectedPrice.toLocaleString()}`;
+totalAmountEl.textContent = `KES ${selectedPrice.toLocaleString()}`;
 
 methods.forEach(method => {
 
@@ -41,7 +52,7 @@ document.getElementById("payNow").addEventListener("click", () => {
         },
 
         body: JSON.stringify({
-            amount: 2450,
+            amount: selectedPrice,
             paymentMethod: selected
         })
 

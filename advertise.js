@@ -594,9 +594,25 @@ function closeModal() {
   modal.style.display = "none";
 }
 
+function goToPaymentPage(advert) {
+  const params = new URLSearchParams();
+
+  if (advert) {
+    params.set("item", advert.title);
+    params.set("price", advert.price);
+  }
+
+  const queryString = params.toString();
+  window.location.href = `payment.html${queryString ? `?${queryString}` : ""}`;
+}
+
+function addToCart() {
+  goToPaymentPage();
+}
+
 function handleAdvertAction(id) {
   const advert = advertsData.find((a) => a.id === id);
-  alert(`✓ "${advert.title}" added to cart!\nPrice: $${advert.price}`);
+  goToPaymentPage(advert);
 }
 
 function handleContactSeller(id) {
@@ -607,8 +623,8 @@ function handleContactSeller(id) {
 
 function handleAddCart(id) {
   const advert = advertsData.find((a) => a.id === id);
-  alert(`✓ "${advert.title}" added to cart!\nPrice: $${advert.price}`);
   closeModal();
+  goToPaymentPage(advert);
 }
 
 // Utility functions
